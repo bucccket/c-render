@@ -1,0 +1,22 @@
+[
+{
+  "directory": "D:/Programming/c-render/build",
+  "command": "\"D:\\Program Files\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-gcc.exe\"   -g -o CMakeFiles\\c-render.dir\\src\\app_main.c.obj -c D:\\Programming\\c-render\\src\\app_main.c",
+  "file": "D:/Programming/c-render/src/app_main.c"
+},
+{
+  "directory": "D:/Programming/c-render/build/src/render_pipeline",
+  "command": "\"D:\\Program Files\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-gcc.exe\"   -g -o CMakeFiles\\render.dir\\char_buffer.c.obj -c D:\\Programming\\c-render\\src\\render_pipeline\\char_buffer.c",
+  "file": "D:/Programming/c-render/src/render_pipeline/char_buffer.c"
+},
+{
+  "directory": "D:/Programming/c-render/build/src/render_pipeline",
+  "command": "\"D:\\Program Files\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-gcc.exe\"   -g -o CMakeFiles\\render.dir\\char_render.c.obj -c D:\\Programming\\c-render\\src\\render_pipeline\\char_render.c",
+  "file": "D:/Programming/c-render/src/render_pipeline/char_render.c"
+},
+{
+  "directory": "D:/Programming/c-render/build/src/utils",
+  "command": "\"D:\\Program Files\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-gcc.exe\"   -g -o CMakeFiles\\utils.dir\\keyboard.c.obj -c D:\\Programming\\c-render\\src\\utils\\keyboard.c",
+  "file": "D:/Programming/c-render/src/utils/keyboard.c"
+}
+]

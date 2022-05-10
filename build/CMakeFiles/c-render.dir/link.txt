@@ -1,1 +1,3 @@
-/usr/bin/cc CMakeFiles/c-render.dir/src/app_main.c.o -o ../bin/c-render  ../lib/libutils.a ../lib/librender.a -lcurses -lcurses 
+"D:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\c-render.dir/objects.a
+"D:\Program Files\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\ar.exe" qc CMakeFiles\c-render.dir/objects.a @CMakeFiles\c-render.dir\objects1.rsp
+"D:\Program Files\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-gcc.exe" -g -Wl,--whole-archive CMakeFiles\c-render.dir/objects.a -Wl,--no-whole-archive -o ..\bin\c-render.exe -Wl,--out-implib,..\bin\libc-render.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\c-render.dir\linklibs.rsp

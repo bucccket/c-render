@@ -1,7 +1,10 @@
 file(REMOVE_RECURSE
-  "../bin/c-render"
+  "../bin/c-render.exe"
+  "../bin/c-render.exe.manifest"
   "../bin/c-render.pdb"
-  "CMakeFiles/c-render.dir/src/app_main.c.o"
+  "../bin/libc-render.dll.a"
+  "CMakeFiles/c-render.dir/src/app_main.c.obj"
+  "CMakeFiles/c-render.dir/src/app_main.c.obj.d"
 )
 
 # Per-language clean rules from dependency scanning.

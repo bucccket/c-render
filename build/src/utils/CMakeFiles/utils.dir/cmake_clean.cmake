@@ -1,7 +1,8 @@
 file(REMOVE_RECURSE
   "../../../lib/libutils.a"
   "../../../lib/libutils.pdb"
-  "CMakeFiles/utils.dir/keyboard.c.o"
+  "CMakeFiles/utils.dir/keyboard.c.obj"
+  "CMakeFiles/utils.dir/keyboard.c.obj.d"
 )
 
 # Per-language clean rules from dependency scanning.

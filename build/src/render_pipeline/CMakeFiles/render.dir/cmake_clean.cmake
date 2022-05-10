@@ -1,8 +1,10 @@
 file(REMOVE_RECURSE
   "../../../lib/librender.a"
   "../../../lib/librender.pdb"
-  "CMakeFiles/render.dir/char_buffer.c.o"
-  "CMakeFiles/render.dir/char_render.c.o"
+  "CMakeFiles/render.dir/char_buffer.c.obj"
+  "CMakeFiles/render.dir/char_buffer.c.obj.d"
+  "CMakeFiles/render.dir/char_render.c.obj"
+  "CMakeFiles/render.dir/char_render.c.obj.d"
 )
 
 # Per-language clean rules from dependency scanning.

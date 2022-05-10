@@ -1,2 +1,2 @@
-/usr/bin/ar qc ../../../lib/librender.a CMakeFiles/render.dir/char_buffer.c.o CMakeFiles/render.dir/char_render.c.o
-/usr/bin/ranlib ../../../lib/librender.a
+"D:\Program Files\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\ar.exe" qc ..\..\..\lib\librender.a CMakeFiles/render.dir/char_buffer.c.obj CMakeFiles/render.dir/char_render.c.obj
+"D:\Program Files\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\ranlib.exe" ..\..\..\lib\librender.a
