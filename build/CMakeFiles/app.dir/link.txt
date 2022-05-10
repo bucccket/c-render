@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/app.dir/src/app_main.c.o -o app  -lrender_pipeline -lrender 

@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/c-render.dir/src/app_main.c.o -o ../bin/c-render  ../lib/libutils.a ../lib/librender.a -lcurses -lcurses 

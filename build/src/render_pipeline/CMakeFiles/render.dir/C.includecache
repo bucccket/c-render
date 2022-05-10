@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/bucccket/programs/C-console-render/src/render_pipeline/char_render.c
+char_render.h
+/home/bucccket/programs/C-console-render/src/render_pipeline/char_render.h
+
+/home/bucccket/programs/C-console-render/src/render_pipeline/char_render.h
+sys/ioctl.h
+-
+ncurses.h
+-
+string.h
+-
+

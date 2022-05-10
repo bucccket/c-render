@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/bucccket/programs/C-console-render/src/utils/keyboard.c
+keyboard.h
+/home/bucccket/programs/C-console-render/src/utils/keyboard.h
+
+/home/bucccket/programs/C-console-render/src/utils/keyboard.h
+stdio.h
+-
+sys/select.h
+-
+sys/time.h
+-
+sys/types.h
+-
+unistd.h
+-
+
