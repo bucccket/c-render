@@ -11,5 +11,7 @@ add_executable(c-render src/app_main.c)
 
 target_link_libraries(c-render utils)
 target_link_libraries(c-render render)
+target_link_libraries(c-render graphics)
+target_link_libraries(c-render fs)
 
 install(TARGETS c-render RUNTIME DESTINATION ${BIN_DIR})

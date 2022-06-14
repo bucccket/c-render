@@ -25,3 +25,17 @@
 /home/bucccket/programs/C-console-render/build/src/utils/CMakeFiles/rebuild_cache.dir
 /home/bucccket/programs/C-console-render/build/src/utils/CMakeFiles/edit_cache.dir
 /home/bucccket/programs/C-console-render/build/src/utils/CMakeFiles/utils.dir
+/home/bucccket/programs/C-console-render/build/src/graphics/CMakeFiles/install/strip.dir
+/home/bucccket/programs/C-console-render/build/src/graphics/CMakeFiles/install/local.dir
+/home/bucccket/programs/C-console-render/build/src/graphics/CMakeFiles/install.dir
+/home/bucccket/programs/C-console-render/build/src/graphics/CMakeFiles/list_install_components.dir
+/home/bucccket/programs/C-console-render/build/src/graphics/CMakeFiles/rebuild_cache.dir
+/home/bucccket/programs/C-console-render/build/src/graphics/CMakeFiles/edit_cache.dir
+/home/bucccket/programs/C-console-render/build/src/graphics/CMakeFiles/graphics.dir
+/home/bucccket/programs/C-console-render/build/src/filesystem/CMakeFiles/install/strip.dir
+/home/bucccket/programs/C-console-render/build/src/filesystem/CMakeFiles/install/local.dir
+/home/bucccket/programs/C-console-render/build/src/filesystem/CMakeFiles/install.dir
+/home/bucccket/programs/C-console-render/build/src/filesystem/CMakeFiles/list_install_components.dir
+/home/bucccket/programs/C-console-render/build/src/filesystem/CMakeFiles/rebuild_cache.dir
+/home/bucccket/programs/C-console-render/build/src/filesystem/CMakeFiles/edit_cache.dir
+/home/bucccket/programs/C-console-render/build/src/filesystem/CMakeFiles/fs.dir

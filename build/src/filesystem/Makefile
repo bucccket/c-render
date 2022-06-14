@@ -145,14 +145,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/bucccket/programs/C-console-render/build/CMakeFiles /home/bucccket/programs/C-console-render/build//CMakeFiles/progress.marks
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
+	cd /home/bucccket/programs/C-console-render/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/bucccket/programs/C-console-render/build/CMakeFiles /home/bucccket/programs/C-console-render/build/src/filesystem//CMakeFiles/progress.marks
+	cd /home/bucccket/programs/C-console-render/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/filesystem/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/bucccket/programs/C-console-render/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 clean
+	cd /home/bucccket/programs/C-console-render/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/filesystem/clean
 .PHONY : clean
 
 # The main clean target
@@ -162,110 +162,60 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/bucccket/programs/C-console-render/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/filesystem/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/bucccket/programs/C-console-render/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/filesystem/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/bucccket/programs/C-console-render/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-#=============================================================================
-# Target rules for targets named c-render
+# Convenience name for target.
+src/filesystem/CMakeFiles/fs.dir/rule:
+	cd /home/bucccket/programs/C-console-render/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/filesystem/CMakeFiles/fs.dir/rule
+.PHONY : src/filesystem/CMakeFiles/fs.dir/rule
 
-# Build rule for target.
-c-render: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 c-render
-.PHONY : c-render
+# Convenience name for target.
+fs: src/filesystem/CMakeFiles/fs.dir/rule
 
-# fast build rule for target.
-c-render/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-render.dir/build.make CMakeFiles/c-render.dir/build
-.PHONY : c-render/fast
-
-#=============================================================================
-# Target rules for targets named render
-
-# Build rule for target.
-render: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 render
-.PHONY : render
-
-# fast build rule for target.
-render/fast:
-	$(MAKE) $(MAKESILENT) -f src/render_pipeline/CMakeFiles/render.dir/build.make src/render_pipeline/CMakeFiles/render.dir/build
-.PHONY : render/fast
-
-#=============================================================================
-# Target rules for targets named utils
-
-# Build rule for target.
-utils: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 utils
-.PHONY : utils
-
-# fast build rule for target.
-utils/fast:
-	$(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/utils.dir/build.make src/utils/CMakeFiles/utils.dir/build
-.PHONY : utils/fast
-
-#=============================================================================
-# Target rules for targets named graphics
-
-# Build rule for target.
-graphics: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 graphics
-.PHONY : graphics
-
-# fast build rule for target.
-graphics/fast:
-	$(MAKE) $(MAKESILENT) -f src/graphics/CMakeFiles/graphics.dir/build.make src/graphics/CMakeFiles/graphics.dir/build
-.PHONY : graphics/fast
-
-#=============================================================================
-# Target rules for targets named fs
-
-# Build rule for target.
-fs: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 fs
 .PHONY : fs
 
 # fast build rule for target.
 fs/fast:
-	$(MAKE) $(MAKESILENT) -f src/filesystem/CMakeFiles/fs.dir/build.make src/filesystem/CMakeFiles/fs.dir/build
+	cd /home/bucccket/programs/C-console-render/build && $(MAKE) $(MAKESILENT) -f src/filesystem/CMakeFiles/fs.dir/build.make src/filesystem/CMakeFiles/fs.dir/build
 .PHONY : fs/fast
 
-src/app_main.o: src/app_main.c.o
+content_loader.o: content_loader.c.o
 
-.PHONY : src/app_main.o
+.PHONY : content_loader.o
 
 # target to build an object file
-src/app_main.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-render.dir/build.make CMakeFiles/c-render.dir/src/app_main.c.o
-.PHONY : src/app_main.c.o
+content_loader.c.o:
+	cd /home/bucccket/programs/C-console-render/build && $(MAKE) $(MAKESILENT) -f src/filesystem/CMakeFiles/fs.dir/build.make src/filesystem/CMakeFiles/fs.dir/content_loader.c.o
+.PHONY : content_loader.c.o
 
-src/app_main.i: src/app_main.c.i
+content_loader.i: content_loader.c.i
 
-.PHONY : src/app_main.i
+.PHONY : content_loader.i
 
 # target to preprocess a source file
-src/app_main.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-render.dir/build.make CMakeFiles/c-render.dir/src/app_main.c.i
-.PHONY : src/app_main.c.i
+content_loader.c.i:
+	cd /home/bucccket/programs/C-console-render/build && $(MAKE) $(MAKESILENT) -f src/filesystem/CMakeFiles/fs.dir/build.make src/filesystem/CMakeFiles/fs.dir/content_loader.c.i
+.PHONY : content_loader.c.i
 
-src/app_main.s: src/app_main.c.s
+content_loader.s: content_loader.c.s
 
-.PHONY : src/app_main.s
+.PHONY : content_loader.s
 
 # target to generate assembly for a file
-src/app_main.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-render.dir/build.make CMakeFiles/c-render.dir/src/app_main.c.s
-.PHONY : src/app_main.c.s
+content_loader.c.s:
+	cd /home/bucccket/programs/C-console-render/build && $(MAKE) $(MAKESILENT) -f src/filesystem/CMakeFiles/fs.dir/build.make src/filesystem/CMakeFiles/fs.dir/content_loader.c.s
+.PHONY : content_loader.c.s
 
 # Help Target
 help:
@@ -279,14 +229,10 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... c-render"
 	@echo "... fs"
-	@echo "... graphics"
-	@echo "... render"
-	@echo "... utils"
-	@echo "... src/app_main.o"
-	@echo "... src/app_main.i"
-	@echo "... src/app_main.s"
+	@echo "... content_loader.o"
+	@echo "... content_loader.i"
+	@echo "... content_loader.s"
 .PHONY : help
 
 
@@ -298,6 +244,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/bucccket/programs/C-console-render/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

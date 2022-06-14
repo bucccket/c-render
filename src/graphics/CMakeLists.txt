@@ -8,4 +8,4 @@ set(GRAPHICS_SRC
    graphic.c
 )
 
-add_library(render ${RENDER_HDRS} ${RENDER_SRC})
+add_library(graphics ${GRAPHICS_HDRS} ${GRAPHICS_SRC})

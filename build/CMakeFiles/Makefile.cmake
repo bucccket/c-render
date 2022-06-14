@@ -12,6 +12,8 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.18.4/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.18.4/CMakeSystem.cmake"
   "../src/CMakeLists.txt"
+  "../src/filesystem/CMakeLists.txt"
+  "../src/graphics/CMakeLists.txt"
   "../src/render_pipeline/CMakeLists.txt"
   "../src/utils/CMakeLists.txt"
   "/usr/share/cmake-3.18/Modules/CMakeCInformation.cmake"
@@ -52,6 +54,8 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "src/CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/render_pipeline/CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/utils/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/graphics/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/filesystem/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
@@ -59,4 +63,6 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/c-render.dir/DependInfo.cmake"
   "src/render_pipeline/CMakeFiles/render.dir/DependInfo.cmake"
   "src/utils/CMakeFiles/utils.dir/DependInfo.cmake"
+  "src/graphics/CMakeFiles/graphics.dir/DependInfo.cmake"
+  "src/filesystem/CMakeFiles/fs.dir/DependInfo.cmake"
   )

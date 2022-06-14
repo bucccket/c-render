@@ -100,6 +100,8 @@ c__render_EXTERNAL_OBJECTS =
 ../bin/c-render: CMakeFiles/c-render.dir/build.make
 ../bin/c-render: ../lib/libutils.a
 ../bin/c-render: ../lib/librender.a
+../bin/c-render: ../lib/libgraphics.a
+../bin/c-render: ../lib/libfs.a
 ../bin/c-render: ../lib/libutils.a
 ../bin/c-render: /usr/lib/aarch64-linux-gnu/libcurses.so
 ../bin/c-render: CMakeFiles/c-render.dir/link.txt

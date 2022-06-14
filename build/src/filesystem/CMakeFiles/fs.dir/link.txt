@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../../lib/libfs.a CMakeFiles/fs.dir/content_loader.c.o
+/usr/bin/ranlib ../../../lib/libfs.a
