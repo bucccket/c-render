@@ -100,6 +100,7 @@ c__render_EXTERNAL_OBJECTS =
 ../bin/c-render: CMakeFiles/c-render.dir/build.make
 ../bin/c-render: ../lib/libutils.a
 ../bin/c-render: ../lib/librender.a
+../bin/c-render: ../lib/libutils.a
 ../bin/c-render: /usr/lib/aarch64-linux-gnu/libcurses.so
 ../bin/c-render: CMakeFiles/c-render.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/bucccket/programs/C-console-render/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable ../bin/c-render"

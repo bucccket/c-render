@@ -17,4 +17,14 @@ ncurses.h
 -
 string.h
 -
+stdlib.h
+-
+../utils/keyboard.h
+/home/bucccket/programs/C-console-render/src/utils/keyboard.h
+
+/home/bucccket/programs/C-console-render/src/utils/keyboard.h
+unistd.h
+-
+ncurses.h
+-
 

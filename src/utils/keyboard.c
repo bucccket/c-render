@@ -1,24 +1,18 @@
 #include "keyboard.h"
 
-int KeyPressed(int* pKeyCode)
+void initKeyboard(void){
+  cbreak();
+  noecho();
+  nodelay(stdscr, TRUE);
+}
+
+int KeyPressed()
 {
- int KeyIsPressed = 0;
- struct timeval tv;
- fd_set rdfs;
+  int c = wgetch(stdscr);
 
- tv.tv_sec = tv.tv_usec = 0;
-
- FD_ZERO(&rdfs);
- FD_SET(STDIN_FILENO, &rdfs);
-
- select(STDIN_FILENO+1, &rdfs, NULL, NULL, &tv);
-
- if(FD_ISSET(STDIN_FILENO, &rdfs))
- {
-  int KeyCode = getchar();
-  if(pKeyCode != NULL) *pKeyCode = KeyCode;
-  KeyIsPressed = 1;
- }
-
- return KeyIsPressed;
+  if (c == ERR)
+  {
+    return 0;
+  }
+  return c;
 }

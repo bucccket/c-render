@@ -6,3 +6,4 @@ src/render_pipeline/CMakeFiles/render.dir/char_buffer.c.o
 src/render_pipeline/CMakeFiles/render.dir/char_render.c.o
  /home/bucccket/programs/C-console-render/src/render_pipeline/char_render.c
  /home/bucccket/programs/C-console-render/src/render_pipeline/char_render.h
+ /home/bucccket/programs/C-console-render/src/utils/keyboard.h

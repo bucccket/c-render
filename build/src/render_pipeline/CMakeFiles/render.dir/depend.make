@@ -5,4 +5,5 @@ src/render_pipeline/CMakeFiles/render.dir/char_buffer.c.o: ../src/render_pipelin
 
 src/render_pipeline/CMakeFiles/render.dir/char_render.c.o: ../src/render_pipeline/char_render.c
 src/render_pipeline/CMakeFiles/render.dir/char_render.c.o: ../src/render_pipeline/char_render.h
+src/render_pipeline/CMakeFiles/render.dir/char_render.c.o: ../src/utils/keyboard.h
 

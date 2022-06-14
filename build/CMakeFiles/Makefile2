@@ -177,7 +177,7 @@ CMakeFiles/c-render.dir/clean:
 # Target rules for target src/render_pipeline/CMakeFiles/render.dir
 
 # All Build rule for target.
-src/render_pipeline/CMakeFiles/render.dir/all:
+src/render_pipeline/CMakeFiles/render.dir/all: src/utils/CMakeFiles/utils.dir/all
 	$(MAKE) $(MAKESILENT) -f src/render_pipeline/CMakeFiles/render.dir/build.make src/render_pipeline/CMakeFiles/render.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/render_pipeline/CMakeFiles/render.dir/build.make src/render_pipeline/CMakeFiles/render.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bucccket/programs/C-console-render/build/CMakeFiles --progress-num=3,4,5 "Built target render"
@@ -185,7 +185,7 @@ src/render_pipeline/CMakeFiles/render.dir/all:
 
 # Build rule for subdir invocation for target.
 src/render_pipeline/CMakeFiles/render.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/bucccket/programs/C-console-render/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bucccket/programs/C-console-render/build/CMakeFiles 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/render_pipeline/CMakeFiles/render.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/bucccket/programs/C-console-render/build/CMakeFiles 0
 .PHONY : src/render_pipeline/CMakeFiles/render.dir/rule
