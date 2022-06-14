@@ -1,2 +1,0 @@
-/usr/bin/ar qc ../../../lib/librender.a CMakeFiles/render.dir/char_buffer.c.o CMakeFiles/render.dir/char_render.c.o
-/usr/bin/ranlib ../../../lib/librender.a

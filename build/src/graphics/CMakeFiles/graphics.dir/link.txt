@@ -1,2 +1,0 @@
-/usr/bin/ar qc ../../../lib/libgraphics.a CMakeFiles/graphics.dir/sprite.c.o CMakeFiles/graphics.dir/graphic.c.o
-/usr/bin/ranlib ../../../lib/libgraphics.a

@@ -1,1 +1,0 @@
-/usr/bin/cc CMakeFiles/app.dir/app_main.c.o -o app  -lrender 
