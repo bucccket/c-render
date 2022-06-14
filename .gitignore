@@ -1,3 +1,6 @@
 *~
 *.swp
 c-console-render
+build/
+bin/
+
