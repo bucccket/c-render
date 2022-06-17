@@ -33,13 +33,15 @@
 
 #include "render_pipeline/char_render.h"
 #include "utils/keyboard.h"
+#include "filesystem/content_loader.h"
 
-int
-main (int argc,
-      char *argv[])
+
+int main(int argc, char *argv[])
 {
 
-  testScreenCentering();
+  sprite test = sprite_.new("none.spr");
+  loadSprite(&test);
+  //testScreenCentering();
 
   return EXIT_SUCCESS;
 }
