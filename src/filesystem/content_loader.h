@@ -2,6 +2,7 @@
 
 #include "../graphics/sprite.h"
 #include "../utils/stringutils.h"
+#include "buffered_reader.h"
 
 #include <stdio.h>
 #include <stdlib.h>

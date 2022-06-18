@@ -1,6 +1,6 @@
 #include "content_loader.h"
 
-char* readSprite(FILE* f);
+char* readFile(FILE* f);
 
 int loadSprite(sprite* spriteInst){
 
@@ -14,10 +14,10 @@ int loadSprite(sprite* spriteInst){
 
     printf("Loading %s ",spriteInst->spriteName);
 
-    graphic g;
-    g.name = "Test";
-    g.data[0] = readSprite(file); //TODO: parser for .spr format
-    spriteInst->graphics[0] = &g;
+    buffer spriteFile = buffer_.new(readFile(file));
+    hexdump (spriteFile.data, spriteFile.size);
+    spriteFile.readUint8(&spriteFile);
+
   }else{
     printf("[ERROR] Couldnt access file %s\n", spriteFile);
     return FS_FILE_ERROR;
@@ -27,7 +27,7 @@ int loadSprite(sprite* spriteInst){
   return FS_OK;
 }
 
-char* readSprite(FILE* f){
+char* readFile(FILE* f){
 
   //getting file size by iterating file.
    if(fseeko(f,0,SEEK_END)!=0){
