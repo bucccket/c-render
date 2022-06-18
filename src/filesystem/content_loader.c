@@ -15,9 +15,9 @@ int loadSprite(sprite* spriteInst){
     printf("Loading %s ",spriteInst->spriteName);
 
     buffer spriteFile = buffer_.new(readFile(file));
-    hexdump (spriteFile.data, spriteFile.size);
-    spriteFile.readUint8(&spriteFile);
-
+    hexdump (spriteFile.data, spriteFile.size+1);
+    printf("got %04x\n",spriteFile.readUint16(&spriteFile));
+    printf("String \"%s\"\n",spriteFile.readString(&spriteFile));
   }else{
     printf("[ERROR] Couldnt access file %s\n", spriteFile);
     return FS_FILE_ERROR;

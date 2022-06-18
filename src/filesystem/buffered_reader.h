@@ -4,21 +4,25 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct buffer_{
+typedef unsigned char * bytestream;
+typedef unsigned char byte;
+typedef unsigned short word;
+typedef unsigned int dword;
+
+struct buffer_
+{
   int size;
   int offset;
-  char* data;
-  unsigned char (*readUint8)(struct buffer_ *this);
-  unsigned short (*readUint16)(struct buffer_ *this);
-  unsigned int (*readUint32)(struct buffer_ *this);
-  unsigned long long int (*readUint64)(struct buffer_ *this);
-  const char* (*readString)(struct buffer_ *this); //TODO: delimited by 0 or as struct.
+  bytestream data;
+  byte (*readUint8)(struct buffer_ *this);
+  word (*readUint16)(struct buffer_ *this);
+  dword (*readUint32)(struct buffer_ *this);
+  const char *(*readString)(struct buffer_ *this); // TODO: range check at beginning of string
 };
 
-extern const struct BufferClass {
-	struct buffer_ (*new)(char* data);
+extern const struct BufferClass
+{
+  struct buffer_ (*new)(char *data);
 } buffer_;
 
 typedef struct buffer_ buffer;
-
-

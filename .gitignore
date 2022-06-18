@@ -1,6 +1,7 @@
 *~
 *.swp
 c-console-render
+.vscode/
+build/CMakeCache.txt
 build/
 bin/
-

@@ -15,6 +15,4 @@
 #define FS_FILE_ERROR 1
 #define FS_PARSE_ERROR 2
 
-typedef char* bytestream;
-
-int loadSprite(sprite* spriteInst);
+int loadSprite(sprite *spriteInst);
