@@ -35,13 +35,28 @@
 #include "utils/keyboard.h"
 #include "filesystem/content_loader.h"
 
+void parseArgs(int argc, char *argv[]);
 
 int main(int argc, char *argv[])
 {
 
-  sprite test = sprite_.new("none.spr");
+  parseArgs(argc,argv);
+
+  sprite test = sprite_.new("nonetest.spr");
   loadSprite(&test);
   //testScreenCentering();
 
   return EXIT_SUCCESS;
+}
+
+void parseArgs(int argc, char *argv[])
+{
+  printf("cmdline args count=%d\n", argc);
+
+  /* First argument is executable name only */
+  printf("exe name=%s\n", argv[0]);
+
+  for (int i=1; i< argc; i++) {
+    printf("arg%d=%s\n", i, argv[i]);
+  }
 }

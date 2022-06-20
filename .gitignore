@@ -4,4 +4,4 @@ c-console-render
 .vscode/
 build/CMakeCache.txt
 build/
-bin/
+bin/c-render

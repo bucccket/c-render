@@ -9,7 +9,7 @@ typedef unsigned char byte;
 typedef unsigned short word;
 typedef unsigned int dword;
 
-struct buffer_
+typedef struct buffer_
 {
   int size;
   int offset;
@@ -18,11 +18,12 @@ struct buffer_
   word (*readUint16)(struct buffer_ *this);
   dword (*readUint32)(struct buffer_ *this);
   const char *(*readString)(struct buffer_ *this); // TODO: range check at beginning of string
-};
+}buffer;
 
 extern const struct BufferClass
 {
-  struct buffer_ (*new)(char *data);
+  struct buffer_ (*new)(FILE* data);
 } buffer_;
 
-typedef struct buffer_ buffer;
+bytestream readFile(FILE* f);
+off_t getFileSize(FILE* f);

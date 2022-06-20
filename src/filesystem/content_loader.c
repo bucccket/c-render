@@ -1,7 +1,5 @@
 #include "content_loader.h"
 
-char* readFile(FILE* f);
-
 int loadSprite(sprite* spriteInst){
 
   const char* spriteFile = prepend("./sprites/",spriteInst->spriteName);
@@ -14,10 +12,15 @@ int loadSprite(sprite* spriteInst){
 
     printf("Loading %s ",spriteInst->spriteName);
 
-    buffer spriteFile = buffer_.new(readFile(file));
-    hexdump (spriteFile.data, spriteFile.size+1);
-    printf("got %04x\n",spriteFile.readUint16(&spriteFile));
-    printf("String \"%s\"\n",spriteFile.readString(&spriteFile));
+    buffer spriteFile = buffer_.new(file);
+    hexdump (spriteFile.data, spriteFile.size);
+
+    printf("header %08X\n",spriteFile.readUint32(&spriteFile));
+    printf("version %04X\n",spriteFile.readUint16(&spriteFile));
+    printf("sprite name \"%s\"\n",spriteFile.readString(&spriteFile));
+    printf("frames %04X\n",spriteFile.readUint16(&spriteFile));
+    printf("X Pos %04X\n",spriteFile.readUint16(&spriteFile));
+    printf("Y Pos %04X\n",spriteFile.readUint16(&spriteFile));
   }else{
     printf("[ERROR] Couldnt access file %s\n", spriteFile);
     return FS_FILE_ERROR;
@@ -25,29 +28,4 @@ int loadSprite(sprite* spriteInst){
   printf("- success\n");
 
   return FS_OK;
-}
-
-char* readFile(FILE* f){
-
-  //getting file size by iterating file.
-   if(fseeko(f,0,SEEK_END)!=0){
-      printf("reading error SEEK_END\n");
-      return NULL;
-   }
-   off_t size = ftello(f);
-   if(fseeko(f,0,SEEK_SET) != 0){
-      printf("reading error SEEK_SET\n");
-      return NULL;
-   }
-
-   //rewind  file offset
-   rewind(f);
-   char* data = (char*)malloc(size*sizeof(char));
-   if(!data){
-      printf("malloc error.\n");
-      return NULL;
-   }
-   fread(data,size,1,f);
-   fclose(f);
-   return data;
 }

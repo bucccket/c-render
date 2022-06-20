@@ -7,7 +7,7 @@ char* prepend(const char* prepended, const char* source){
   return res;
 }
 
-void hexdump(char* data, size_t size){
+void hexdump(bytestream data, size_t size){
   //hex dump
   printf("\n\033[1;36moffset    \033[1;34m00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F\n00000000\033[0m  ");
   for(int i = 1; i<=size; i++){
@@ -23,7 +23,7 @@ void hexdump(char* data, size_t size){
     const char* highlight = "\033[1;33m";
     const char* normal = "\033[0m";
     const char* none = "";
-    printf("%s%02x%s ",(i<=3?highlight:none),(unsigned char)data[i-1],(i<=3?normal:none)); // with 2x per hex write numbers
+    printf("%s%02X%s ",(i<=4?highlight:none),data[i-1],(i<=4?normal:none)); // with 2x per hex write numbers
     if(i%16==0){ //newline on every hexadecimal
       printf("\n\033[1;34m%s\033[0m  ",padding);
     }
