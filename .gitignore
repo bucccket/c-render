@@ -3,4 +3,5 @@
 c-console-render
 .vscode/
 build/
+lib/
 bin/c-render
