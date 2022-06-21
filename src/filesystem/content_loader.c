@@ -23,7 +23,8 @@ int loadSprite(sprite* spriteInst){
     printf("Y Pos %04X\n",spriteFile.readUint16(&spriteFile));
 
     printf("---------\n");
-    printf("section size:%d\nGraphic %s\n",spriteFile.readUint32(&spriteFile),spriteFile.readString(&spriteFile));
+    printf("section size:%d\n",spriteFile.readUint32(&spriteFile));
+    printf("Graphic %s\n",spriteFile.readString(&spriteFile));
     printf("x: %d\t\ty: %d\n",spriteFile.readUint16(&spriteFile),spriteFile.readUint16(&spriteFile));
     int width = spriteFile.readUint16(&spriteFile);
     int height = spriteFile.readUint16(&spriteFile);
