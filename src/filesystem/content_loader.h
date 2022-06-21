@@ -15,4 +15,7 @@
 #define FS_FILE_ERROR 1
 #define FS_PARSE_ERROR 2
 
+#define ARR_WIDTH(x)  (sizeof(x) / sizeof((x)[0]))
+#define ARR_HEIGHT(x) sizeof(x[0])/sizeof(x[0][0]);
+
 int loadSprite(sprite *spriteInst);
