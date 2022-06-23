@@ -31,3 +31,9 @@ void hexdump(bytestream data, size_t size){
   }
   printf("\n");
 }
+
+void print2dString(char **data,int lines){
+  for(int i=0;i<lines;i++){
+    printf("%s\n",data[i]);
+  }
+}

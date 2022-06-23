@@ -1,10 +1,8 @@
 set(RENDER_HDRS
-   char_buffer.h
    char_render.h
 )
 
 set(RENDER_SRC
-   char_buffer.c
    char_render.c
 )
 

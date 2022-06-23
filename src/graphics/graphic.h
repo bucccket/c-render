@@ -6,9 +6,9 @@ typedef struct graphic_{
   //TODO: animation based fags like : has matrix, has move, has offset?
   short x,y;
   short width, height;
-  const char *data;
+  char **data;
 }graphic;
 
 extern const struct GraphicClass {
-	graphic (*new)(const char* graphicName);
+	graphic (*new)(void);
 } graphic_;

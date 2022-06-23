@@ -32,8 +32,6 @@
 #include <stdlib.h>
 
 #include "render_pipeline/char_render.h"
-#include "utils/keyboard.h"
-#include "filesystem/content_loader.h"
 
 void parseArgs(int argc, char *argv[]);
 
@@ -41,10 +39,7 @@ int main(int argc, char *argv[])
 {
 
   parseArgs(argc,argv);
-
-  sprite test = sprite_.new("nonetest.spr");
-  loadSprite(&test);
-  //testScreenCentering();
+  testScreenCentering();
 
   return EXIT_SUCCESS;
 }

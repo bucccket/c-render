@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../graphics/graphic.h"
 #include "../graphics/sprite.h"
 #include "../utils/stringutils.h"
 #include "buffered_reader.h"
@@ -13,7 +14,8 @@
 
 #define FS_OK 0
 #define FS_FILE_ERROR 1
-#define FS_PARSE_ERROR 2
+#define FS_HEADER_ERROR 2
+#define FS_PARSE_ERROR 3
 
 #define ARR_WIDTH(x)  (sizeof(x) / sizeof((x)[0]))
 #define ARR_HEIGHT(x) sizeof(x[0])/sizeof(x[0][0]);

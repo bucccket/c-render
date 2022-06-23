@@ -15,29 +15,45 @@ int loadSprite(sprite* spriteInst){
     buffer spriteFile = buffer_.new(file);
     hexdump (spriteFile.data, spriteFile.size);
 
-    printf("header %08X\n",spriteFile.readUint32(&spriteFile));
-    printf("version %04X\n",spriteFile.readUint16(&spriteFile));
-    printf("sprite name \"%s\"\n",spriteFile.readString(&spriteFile));
-    printf("frames %04X\n",spriteFile.readUint16(&spriteFile));
-    printf("X Pos %04X\n",spriteFile.readUint16(&spriteFile));
-    printf("Y Pos %04X\n",spriteFile.readUint16(&spriteFile));
-
-    printf("---------\n");
-    printf("section size:%d\n",spriteFile.readUint32(&spriteFile));
-    printf("Graphic %s\n",spriteFile.readString(&spriteFile));
-    printf("x: %d\t\ty: %d\n",spriteFile.readUint16(&spriteFile),spriteFile.readUint16(&spriteFile));
-    int width = spriteFile.readUint16(&spriteFile);
-    int height = spriteFile.readUint16(&spriteFile);
-    printf("width: %d\theight: %d\n",width,height);
-    const char* asciiArt = spriteFile.readString(&spriteFile);
-    if(width*height<strlen(asciiArt)){
-      printf("[FATAL ERROR] graphic data oob! check width and height\n");
-      return FS_PARSE_ERROR;
+    int header = spriteFile.readUint32(&spriteFile);
+    printf("header %08X check %s\n",header,header==0xBEEFB055?"ok":"failed. exiting");
+    if(header!=0xBEEFB055){
+      return FS_HEADER_ERROR;
     }
-    for(int i=0;i<height;i++){
-      printf("%.*s\n",width,asciiArt+(width*i));
-    }
+    spriteInst->formatVersion = spriteFile.readUint16(&spriteFile);
+    spriteInst->spriteName = spriteFile.readString(&spriteFile);
+    spriteInst->frameCount = spriteFile.readUint16(&spriteFile);
+    spriteInst->x=spriteFile.readUint16(&spriteFile);
+    spriteInst->y=spriteFile.readUint16(&spriteFile);
 
+    for(int n=0;n<spriteInst->frameCount;n++){
+      graphic g = (graphic){};
+      g.sectionSize = spriteFile.readUint32(&spriteFile);
+      g.name = spriteFile.readString(&spriteFile);
+      g.x = spriteFile.readUint16(&spriteFile);
+      g.y = spriteFile.readUint16(&spriteFile);
+      g.width = spriteFile.readUint16(&spriteFile);
+      g.height = spriteFile.readUint16(&spriteFile);
+      const char* asciiArt = spriteFile.readString(&spriteFile);
+      if(g.width*g.height<strlen(asciiArt)){
+        printf("[FATAL ERROR] graphic data oob! check width and height\n");
+        return FS_PARSE_ERROR;
+      }
+      g.data = (char**) calloc(g.width*g.height, sizeof(char*));
+      if(g.data)
+      {
+        for(int i = 0; i < g.width*g.height; i++)
+        {
+            g.data[i] = (char*)calloc(g.width*g.height, sizeof(char));
+            memset(g.data[i], 0, sizeof(*g.data[i] * g.width*g.height-1));
+        }
+      }
+      for(int i=0;i<g.height;i++){
+        sprintf(g.data[i],"%.*s",g.width,asciiArt+(g.width*i));
+      }
+      spriteInst->graphics[n] = &g;
+    }
+    printf("checking graphic name g3: %s\n",spriteInst->graphics[spriteInst->frameCount-1]->name);
   }else{
     printf("[ERROR] Couldnt access file %s\n", spriteFile);
     return FS_FILE_ERROR;
