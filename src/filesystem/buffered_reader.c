@@ -21,19 +21,30 @@ static dword readUint32(struct buffer_ *this)
 
 static const char *readString(struct buffer_ *this) // \0 delimted strings
 {
-  int i = 0;
+  int size = 0;
+  char *str = NULL, *tmp = NULL;
   do
   {
-    i++;
+    size++;
   } while (this->data[this->offset++] != 0);
-  char *str = (char *)malloc(i + 1);
-  strncpy(str, (char *)this->data + this->offset - i, i);
+  tmp = realloc(str, size);
+  if (!tmp) {
+      free(str);
+      str = NULL;
+      return NULL;
+  }
+  tmp = realloc (str, size);
+  strncpy(tmp, (char *)this->data + this->offset - size, size);
+  str = tmp;
   return str;
 }
 
 static struct buffer_ new (FILE *data)
 {
-  return (struct buffer_){.data = readFile(data), .size = getFileSize(data), .offset = 0, .readUint8 = &readUint8, .readUint16 = &readUint16, .readUint32 = &readUint32, .readString = &readString};
+  buffer *buffer_struct = (buffer*)calloc(4, sizeof(buffer_));
+  *buffer_struct = (struct buffer_){.data = readFile(data), .size = getFileSize(data), .offset = 0, .readUint8 = &readUint8, .readUint16 = &readUint16, .readUint32 = &readUint32, .readString = &readString};
+  return *buffer_struct;
+
 }
 
 static void *freeBuffer(struct buffer_ *this)

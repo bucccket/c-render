@@ -32,7 +32,7 @@ int testScreenCentering(void)
   initKeyboard(); /* start keyboard nodelay for stdscr */
   while (true)
   {
-    usleep(1000000 / 6); // halt execution for 17ms => 60fps
+    usleep(1000000 / FPS); // halt execution for 17ms => 60fps
 
     int keyStatus = keyHandle(&key);
     if (keyStatus != RENDER_CONTINUE)

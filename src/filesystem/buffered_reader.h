@@ -4,6 +4,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define FS_OK 0
+#define FS_ERR_READ 1
+
 typedef unsigned char * bytestream;
 typedef unsigned char byte;
 typedef unsigned short word;
