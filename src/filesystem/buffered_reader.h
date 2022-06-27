@@ -18,6 +18,7 @@ typedef struct buffer_
   word (*readUint16)(struct buffer_ *this);
   dword (*readUint32)(struct buffer_ *this);
   const char *(*readString)(struct buffer_ *this); // TODO: range check at beginning of string
+  void (*freeBuffer)(struct buffer_ *this);
 }buffer;
 
 extern const struct BufferClass

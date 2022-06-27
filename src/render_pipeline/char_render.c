@@ -18,10 +18,12 @@ int testScreenCentering(void)
     return RENDER_ERROR_FS;
   }
 
-  char *arr[] = {"       ", "       ", " hello ", "  bye  ", "       ", "       ", NULL};
+  graphic *g = test.graphics[0];
+  char *arr[] = {"       ","       "," +---+ ", " |>o<| ", " | ^ | ", " |1 3| ", " +---+ ", "       ","       ", NULL};
+
   int x = 0, y = 5;
   int x_o = 0, y_o = 5;
-  int w = 5, h = 2;
+  int w = test.graphics[0]->width+2, h = test.graphics[0]->height+4;
   int hspeed = 1, vspeed = 1;
 
   getchar();
@@ -30,7 +32,7 @@ int testScreenCentering(void)
   initKeyboard(); /* start keyboard nodelay for stdscr */
   while (true)
   {
-    usleep(1000000 / 60); // halt execution for 17ms => 60fps
+    usleep(1000000 / 6); // halt execution for 17ms => 60fps
 
     int keyStatus = keyHandle(&key);
     if (keyStatus != RENDER_CONTINUE)
