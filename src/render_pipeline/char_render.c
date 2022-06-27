@@ -32,7 +32,8 @@ int testScreenCentering(void)
   initKeyboard(); /* start keyboard nodelay for stdscr */
   while (true)
   {
-    usleep(1000000 / FPS); // halt execution for 17ms => 60fps
+    usleep((1000000 / FPS)-1); // halt execution for 17ms => 60fps
+    begin = clock();
 
     int keyStatus = keyHandle(&key);
     if (keyStatus != RENDER_CONTINUE)
@@ -44,7 +45,7 @@ int testScreenCentering(void)
     {
       drawPrimitiveRect(stdscr, arr, x, y);
       mvprintw(row / 2, (col - strlen(mesg)) / 2, "%s", mesg);
-      mvprintw(row - 1, 0, "baud rate %d row %d col %d\n", baudrate(), row, col);
+      mvprintw(row - 1, 0, "baud rate %d row %d col %d exec %lf\n", baudrate(), row, col, difftime (begin, end)*1000000);
       mvprintw(row - 1, col - 1, "e");
 
       x_o = x;
@@ -63,6 +64,7 @@ int testScreenCentering(void)
 
     refresh();
     curs_set(0); /* disable cursor */
+    end = clock();
   }
   endwin();
   return RENDER_OK;
