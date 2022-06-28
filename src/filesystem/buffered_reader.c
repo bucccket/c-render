@@ -39,11 +39,11 @@ static const char *readString(struct buffer_ *this) // \0 delimted strings
   return str;
 }
 
-static struct buffer_ new (FILE *data)
+static struct buffer_* new (FILE *data)
 {
   buffer *buffer_struct = (buffer*)calloc(4, sizeof(buffer_));
   *buffer_struct = (struct buffer_){.data = readFile(data), .size = getFileSize(data), .offset = 0, .readUint8 = &readUint8, .readUint16 = &readUint16, .readUint32 = &readUint32, .readString = &readString};
-  return *buffer_struct;
+  return buffer_struct;
 
 }
 
