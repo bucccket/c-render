@@ -1,7 +1,9 @@
 #pragma once
 
+#include <stdlib.h>
+
 typedef struct graphic_{
-  int sectionSize; //size itself is NOT part of size measurement :]
+  int sectionSize;
   const char* name;
   //TODO: animation based fags like : has matrix, has move, has offset?
   short x,y;
@@ -11,5 +13,5 @@ typedef struct graphic_{
 }graphic;
 
 extern const struct GraphicClass {
-	graphic (*new)(void);
+	graphic* (*new)(void);
 } graphic_;

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdlib.h>
 #include "graphic.h"
 
 typedef struct sprite_{
@@ -7,9 +8,9 @@ typedef struct sprite_{
   const char* spriteName;
   short frameCount;
   short x,y;
-  graphic *graphics[];
+  graphic **graphics;
 }sprite;
 
 extern const struct SpriteClass {
-	sprite (*new)(const char* spriteName);
+	sprite* (*new)(const char* spriteName);
 } sprite_;

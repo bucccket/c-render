@@ -10,20 +10,19 @@ int testScreenCentering(void)
 
   int frame = 0;
 
-  sprite test = sprite_.new("nonetest.spr");
-  int spriteError = loadSprite(&test);
+  sprite* test = sprite_.new("animtest_1.spr");
+  int spriteError = loadSprite(test);
   if (!!spriteError)
   {
     printf("Sprite error 0x%02X\n", spriteError);
     return RENDER_ERROR_FS;
   }
-  char* r = test.graphics[0]->data[0];
-  graphic *g = test.graphics[0]; //advance frame
+  char* r = test->graphics[0]->data[0];
 
   int x = 0, y = 5;
   int x_o = 0, y_o = 5;
-  int w = test.graphics[0]->width, h = test.graphics[0]->height;
-  int hspeed = 0, vspeed = 0;
+  int w = test->graphics[0]->width, h = test->graphics[0]->height;
+  int hspeed = 1, vspeed = 1;
 
   getchar();
 
@@ -32,6 +31,7 @@ int testScreenCentering(void)
   while (true)
   {
     usleep(1000000 / FPS); // halt execution for 17ms => 60fps
+    graphic *g = test->graphics[frame%test->frameCount]; //advance frame
 
     int keyStatus = keyHandle(&key);
     if (keyStatus != RENDER_CONTINUE)
@@ -41,7 +41,7 @@ int testScreenCentering(void)
 
     if (!adjustScreen(&row, &col, &r_old, &c_old))
     {
-      drawPrimitiveRect(g->data, g->height, x, y);
+      drawPrimitiveRect(g->data,g->height, x, y);
       mvprintw(row / 2, (col - 13) / 2, "%s", "-> center <-");
       mvprintw(row - 1, 0, "baud rate %d row %d col %d\n", baudrate(), row, col);
       mvprintw(row - 1, col - 1, "e");
@@ -61,7 +61,8 @@ int testScreenCentering(void)
     }
 
     refresh();
-    drawPrimitiveRect(g->mask, g->height, x_o, y_o);
+    drawPrimitiveMask(g->mask, g->height, x_o, y_o);
+    frame++;
     curs_set(0); /* disable cursor */
   }
   endwin();

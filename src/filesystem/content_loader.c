@@ -27,12 +27,13 @@ int loadSprite(sprite *spriteInst)
     spriteInst->formatVersion = spriteFile.readUint16(&spriteFile);
     spriteInst->spriteName = spriteFile.readString(&spriteFile);
     spriteInst->frameCount = spriteFile.readUint16(&spriteFile);
+    spriteInst->graphics = calloc(spriteInst->frameCount,sizeof(graphic*));
     spriteInst->x = spriteFile.readUint16(&spriteFile);
     spriteInst->y = spriteFile.readUint16(&spriteFile);
 
     for (int n = 0; n < spriteInst->frameCount; n++)
     {
-      graphic *g = malloc(sizeof(graphic));
+      graphic *g = (graphic*)malloc(sizeof(graphic)); //due to linker issue I need ot manually allocate struct :)
       g->sectionSize = spriteFile.readUint32(&spriteFile);
       g->name = spriteFile.readString(&spriteFile);
       g->x = spriteFile.readUint16(&spriteFile);
