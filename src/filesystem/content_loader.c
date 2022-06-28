@@ -15,11 +15,11 @@ int loadSprite(sprite *spriteInst)
 
     printf("Loading %s ", spriteInst->spriteName);
 
-    buffer* spriteFile = buffer_.new(file); //TODO: it is probably sensical to
-                                            // add the buffer to the struct to
-                                            // maintian the allocated memory
-                                            // (optionally it'd be in a global mem pool)
-    hexdump(spriteFile->data, spriteFile->size);
+    buffer *spriteFile = buffer_.new(file); // TODO: it is probably sensical to
+                                            //  add the buffer to the struct to
+                                            //  maintian the allocated memory
+                                            //  (optionally it'd be in a global mem pool)
+    // hexdump(spriteFile->data, spriteFile->size);
 
     int header = spriteFile->readUint32(spriteFile);
     printf("header %08X check %s\n", header, header == 0xBEEFB055 ? "ok" : "failed. exiting");
@@ -30,20 +30,21 @@ int loadSprite(sprite *spriteInst)
     spriteInst->formatVersion = spriteFile->readUint16(spriteFile);
     spriteInst->spriteName = spriteFile->readString(spriteFile);
     spriteInst->frameCount = spriteFile->readUint16(spriteFile);
-    spriteInst->graphics = calloc(spriteInst->frameCount,sizeof(graphic*));
+    spriteInst->graphics = calloc(spriteInst->frameCount, sizeof(graphic *));
     spriteInst->x = spriteFile->readUint16(spriteFile);
     spriteInst->y = spriteFile->readUint16(spriteFile);
 
     for (int n = 0; n < spriteInst->frameCount; n++)
     {
-      graphic *g = (graphic*)malloc(sizeof(graphic)); //due to linker issue I need ot manually allocate struct :)
+      graphic *g = (graphic *)malloc(sizeof(graphic)); // due to linker issue I need ot manually allocate struct :)
       g->sectionSize = spriteFile->readUint32(spriteFile);
       g->name = spriteFile->readString(spriteFile);
       g->x = spriteFile->readUint16(spriteFile);
       g->y = spriteFile->readUint16(spriteFile);
       g->width = spriteFile->readUint16(spriteFile);
       g->height = spriteFile->readUint16(spriteFile);
-
+     
+      signal(SIGSEGV,SIG_IGN); //Ignoring the Signal
       const char *data = spriteFile->readString(spriteFile);
       if (g->width * g->height < strlen(data))
       {
@@ -64,9 +65,9 @@ int loadSprite(sprite *spriteInst)
       {
         sprintf(g->data[i], "%.*s", g->width, data + (g->width * i));
       }
-      print2dString (g->data, 5);
+      print2dString(g->data, 5);
 
-      const char *mask = spriteFile->readString(spriteFile);
+      char *mask = spriteFile->readString(spriteFile);
       if (g->width * g->height < strlen(data))
       {
         printf("[FATAL ERROR] graphic mask oob! check width and height\n");

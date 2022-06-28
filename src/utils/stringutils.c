@@ -15,7 +15,7 @@ void hexdump(bytestream data, size_t size){
     const char* normal = "\033[0m";
     const char* none = "";
     printf("%s%02X%s ",(i<=4?highlight:none),data[i-1],(i<=4?normal:none)); // with 2x per hex write numbers
-    if(i%16==0){ //newline on every hexadecimal
+    if(i%16==0){ 
       printf("\n\033[1;34m%08X\033[0m  ",i);
     }
   }

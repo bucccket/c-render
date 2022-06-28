@@ -11,6 +11,8 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+#include<signal.h>
+
 #define FS_OK 0
 #define FS_FILE_ERROR 1
 #define FS_HEADER_ERROR 2
