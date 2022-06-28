@@ -39,8 +39,9 @@ int loadSprite(sprite *spriteInst)
       g->y = spriteFile.readUint16(&spriteFile);
       g->width = spriteFile.readUint16(&spriteFile);
       g->height = spriteFile.readUint16(&spriteFile);
-      const char *asciiArt = spriteFile.readString(&spriteFile);
-      if (g->width * g->height < strlen(asciiArt))
+
+      const char *data = spriteFile.readString(&spriteFile);
+      if (g->width * g->height < strlen(data))
       {
         printf("[FATAL ERROR] graphic data oob! check width and height\n");
         return FS_PARSE_ERROR;
@@ -57,15 +58,30 @@ int loadSprite(sprite *spriteInst)
       }
       for (int i = 0; i < g->height; i++)
       {
-        sprintf(g->data[i], "%.*s", g->width, asciiArt + (g->width * i));
+        sprintf(g->data[i], "%.*s", g->width, data + (g->width * i));
       }
-      free(asciiArt);
+
+      const char *mask = spriteFile.readString(&spriteFile);
+      if (g->width * g->height < strlen(data))
+      {
+        printf("[FATAL ERROR] graphic mask oob! check width and height\n");
+        return FS_PARSE_ERROR;
+      }
+      g->mask = (char **)calloc(bounds, sizeof(char *));
+      if (g->mask)
+      {
+        for (int i = 0; i < bounds; i++)
+        {
+          g->mask[i] = (char *)calloc(bounds, sizeof(char));
+          memset(g->mask[i], 0, sizeof(*g->mask[i] * bounds - 1));
+        }
+      }
+      for (int i = 0; i < g->height; i++)
+      {
+        sprintf(g->mask[i], "%.*s", g->width, mask + (g->width * i));
+      }
       spriteInst->graphics[n] = g;
     }
-    // printf("checking graphic name g3: %s\n", spriteInst->graphics[spriteInst->frameCount - 1].name);
-    print2dString(spriteInst->graphics[0]->data, spriteInst->graphics[0]->height);
-    print2dString(spriteInst->graphics[1]->data, spriteInst->graphics[1]->height);
-    print2dString(spriteInst->graphics[2]->data, spriteInst->graphics[2]->height);
   }
   else
   {

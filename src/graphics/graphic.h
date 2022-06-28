@@ -7,6 +7,7 @@ typedef struct graphic_{
   short x,y;
   short width, height;
   char **data;
+  char **mask;
 }graphic;
 
 extern const struct GraphicClass {

@@ -8,7 +8,7 @@ int testScreenCentering(void)
   double time_ms;
   keys key;
 
-  char *mesg = "-> center <-";
+  int frame = 0;
 
   sprite test = sprite_.new("nonetest.spr");
   int spriteError = loadSprite(&test);
@@ -18,13 +18,10 @@ int testScreenCentering(void)
     return RENDER_ERROR_FS;
   }
 
-  graphic *g = test.graphics[0];
-  char *arr[] = {"       ","       "," +---+ ", " |>o<| ", " | ^ | ", " |1 3| ", " +---+ ", "       ","       ", NULL};
-
   int x = 0, y = 5;
   int x_o = 0, y_o = 5;
-  int w = test.graphics[0]->width+2, h = test.graphics[0]->height+4;
-  int hspeed = 1, vspeed = 1;
+  int w = test.graphics[0]->width, h = test.graphics[0]->height;
+  int hspeed = 0, vspeed = 0;
 
   getchar();
 
@@ -32,20 +29,20 @@ int testScreenCentering(void)
   initKeyboard(); /* start keyboard nodelay for stdscr */
   while (true)
   {
-    usleep((1000000 / FPS)-1); // halt execution for 17ms => 60fps
-    begin = clock();
+    usleep(1000000 / FPS); // halt execution for 17ms => 60fps
+    graphic *g = test.graphics[0]; //advance frame
 
     int keyStatus = keyHandle(&key);
     if (keyStatus != RENDER_CONTINUE)
     {
-      return keyStatus;
+      return RENDER_OK;
     }
 
     if (!adjustScreen(&row, &col, &r_old, &c_old))
     {
-      drawPrimitiveRect(stdscr, arr, x, y);
-      mvprintw(row / 2, (col - strlen(mesg)) / 2, "%s", mesg);
-      mvprintw(row - 1, 0, "baud rate %d row %d col %d exec %lf\n", baudrate(), row, col, difftime (begin, end)*1000000);
+      drawPrimitiveRect(g->data, g->height, x, y);
+      mvprintw(row / 2, (col - 13) / 2, "%s", "-> center <-");
+      mvprintw(row - 1, 0, "baud rate %d row %d col %d\n", baudrate(), row, col);
       mvprintw(row - 1, col - 1, "e");
 
       x_o = x;
@@ -63,8 +60,9 @@ int testScreenCentering(void)
     }
 
     refresh();
+    drawPrimitiveRect(g->mask, g->height, x_o, y_o);
     curs_set(0); /* disable cursor */
-    end = clock();
+    frame++;
   }
   endwin();
   return RENDER_OK;
@@ -108,11 +106,19 @@ int adjustScreen(int *row, int *col, int *r_old, int *c_old)
   return SCREEN_OK;
 }
 
-void drawPrimitiveRect(WINDOW *window, char **ptr, int x, int y)
+void drawPrimitiveRect(char **data, int lines, int x, int y)
 {
-  int offs = 0;
-  while (*ptr != NULL)
+  for (int i = 0; i <= lines; i++)
   {
-    mvprintw(y + offs++, x, *ptr++);
+    mvprintw(y + i, x, data[i]);
+  }
+}
+
+void drawPrimitiveMask(char **data, int lines, int x, int y)
+{
+  //will add mask behaviours
+  for (int i = 0; i <= lines; i++)
+  {
+    mvprintw(y + i, x, data[i]);
   }
 }

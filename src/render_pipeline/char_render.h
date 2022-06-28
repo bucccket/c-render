@@ -22,5 +22,7 @@
 
 int testScreenCentering(void); //testing screen proportions
 int adjustScreen(int *row, int *col, int *r_old, int *c_old);
-void drawPrimitiveRect(WINDOW *window, char **ptr, int x, int y);
+void drawPrimitiveRect(char **data,int lines, int x, int y);
+void drawPrimitiveMask(char **data,int lines, int x, int y);
 int keyHandle(keys* key);
+

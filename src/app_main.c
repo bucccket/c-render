@@ -40,6 +40,7 @@ int main(int argc, char *argv[])
 
   parseArgs(argc,argv);
   testScreenCentering();
+  printf("end.\n");
 
   return EXIT_SUCCESS;
 }
