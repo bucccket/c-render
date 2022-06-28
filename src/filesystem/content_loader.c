@@ -60,6 +60,7 @@ int loadSprite(sprite *spriteInst)
       {
         sprintf(g->data[i], "%.*s", g->width, data + (g->width * i));
       }
+      print2dString (g->data, 5);
 
       const char *mask = spriteFile.readString(&spriteFile);
       if (g->width * g->height < strlen(data))

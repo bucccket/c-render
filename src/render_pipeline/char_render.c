@@ -17,6 +17,8 @@ int testScreenCentering(void)
     printf("Sprite error 0x%02X\n", spriteError);
     return RENDER_ERROR_FS;
   }
+  char* r = test.graphics[0]->data[0];
+  graphic *g = test.graphics[0]; //advance frame
 
   int x = 0, y = 5;
   int x_o = 0, y_o = 5;
@@ -30,7 +32,6 @@ int testScreenCentering(void)
   while (true)
   {
     usleep(1000000 / FPS); // halt execution for 17ms => 60fps
-    graphic *g = test.graphics[0]; //advance frame
 
     int keyStatus = keyHandle(&key);
     if (keyStatus != RENDER_CONTINUE)
@@ -62,7 +63,6 @@ int testScreenCentering(void)
     refresh();
     drawPrimitiveRect(g->mask, g->height, x_o, y_o);
     curs_set(0); /* disable cursor */
-    frame++;
   }
   endwin();
   return RENDER_OK;
@@ -108,7 +108,7 @@ int adjustScreen(int *row, int *col, int *r_old, int *c_old)
 
 void drawPrimitiveRect(char **data, int lines, int x, int y)
 {
-  for (int i = 0; i <= lines; i++)
+  for (int i = 0; i < lines; i++)
   {
     mvprintw(y + i, x, data[i]);
   }
