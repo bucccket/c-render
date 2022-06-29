@@ -45,6 +45,8 @@ int loadSprite(sprite *spriteInst)
       if (g->width * g->height < strlen(data))
       {
         printf("[FATAL ERROR] graphic data oob! check width and height\n");
+        free(data);
+        spriteFile->freeBuffer(spriteFile);
         return FS_PARSE_ERROR;
       }
       int bounds = (g->width * g->height) + 1;
@@ -66,6 +68,9 @@ int loadSprite(sprite *spriteInst)
       if (g->width * g->height < strlen(data))
       {
         printf("[FATAL ERROR] graphic mask oob! check width and height\n");
+        free(data);
+        free(mask);
+        spriteFile->freeBuffer(spriteFile);
         return FS_PARSE_ERROR;
       }
       g->mask = (char **)calloc(bounds, sizeof(char *));
