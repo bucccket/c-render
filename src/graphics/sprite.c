@@ -1,6 +1,6 @@
 #include "sprite.h"
 
-static void freeBuffer(struct sprite_ *this)
+static void freeBuffer(sprite *this)
 {
   for (int i = 0; i < this->frameCount; i++)
   {
@@ -12,10 +12,10 @@ static void freeBuffer(struct sprite_ *this)
   free(this);
 }
 
-static struct sprite_ *new (char *name)
+static sprite *new (char *name)
 {
   sprite *sprite_ptr = (sprite *)malloc(sizeof(sprite));
-  *sprite_ptr = (struct sprite_){.spriteName = name, .freeBuffer = &freeBuffer};
+  *sprite_ptr = (sprite){.spriteName = name, .freeBuffer = &freeBuffer};
   return sprite_ptr;
 }
 
