@@ -10,9 +10,10 @@ int testScreenCentering(void)
   int spriteError = loadSprite(test);
   if (spriteError)
   {
-    printf("Sprite error ID %d\n", spriteError);
+    fprintf(stderr,"Sprite error ID %d\n", spriteError);
     test->freeBuffer(test);
     endwin();
+     
     return RENDER_ERROR_FS;
   }
   int frame = 0;
@@ -20,7 +21,7 @@ int testScreenCentering(void)
   int x = 0, y = 5;
   int x_o = 0, y_o = 5;
   int w = test->graphics[0]->width, h = test->graphics[0]->height;
-  int hspeed = 1, vspeed = 1;
+  int hspeed = 1, vspeed = 0;
 
   getchar();
 
@@ -58,7 +59,7 @@ int testScreenCentering(void)
       }
     }
 
-    refresh();
+    wrefresh(stdscr);
     drawPrimitiveMask(g->mask, g->height, x_o, y_o);
     frame++;
     curs_set(0); /* disable cursor */

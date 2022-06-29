@@ -17,3 +17,4 @@
 #define FS_PARSE_ERROR 3
 
 int loadSprite(sprite *spriteInst);
+int parseGraphic(graphic *g, buffer* spriteFile);
