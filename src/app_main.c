@@ -27,7 +27,6 @@
  * authorization.
  */
 
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -38,7 +37,7 @@ void parseArgs(int argc, char *argv[]);
 int main(int argc, char *argv[])
 {
 
-  parseArgs(argc,argv);
+  parseArgs(argc, argv);
   testScreenCentering();
   printf("end.\n");
 
@@ -52,7 +51,8 @@ void parseArgs(int argc, char *argv[])
   /* First argument is executable name only */
   printf("exe name=%s\n", argv[0]);
 
-  for (int i=1; i< argc; i++) {
+  for (int i = 1; i < argc; i++)
+  {
     printf("arg%d=%s\n", i, argv[i]);
   }
 }

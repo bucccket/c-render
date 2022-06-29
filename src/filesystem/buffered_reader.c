@@ -19,7 +19,7 @@ static dword readUint32(struct buffer_ *this)
                         (byte)this->data[this->offset++] << 24);
 }
 
-static const char *readString(struct buffer_ *this) // \0 delimted strings
+static char *readString(struct buffer_ *this) // \0 delimted strings
 {
   int size = 0;
   do
@@ -31,20 +31,21 @@ static const char *readString(struct buffer_ *this) // \0 delimted strings
   {
     return NULL;
   }
-  memcpy(str,this->data + this->offset - size, size-1);
+  memcpy(str, this->data + this->offset - size, size - 1);
   return str;
-}
-
-static struct buffer_ *new (FILE *data)
-{
-  buffer *buffer_struct = (buffer *)malloc(sizeof(buffer));
-  *buffer_struct = (struct buffer_){.data = readFile(data), .size = getFileSize(data), .offset = 0, .readUint8 = &readUint8, .readUint16 = &readUint16, .readUint32 = &readUint32, .readString = &readString};
-  return buffer_struct;
 }
 
 static void *freeBuffer(struct buffer_ *this)
 {
   free(this->data);
+  free(this);
+}
+
+static struct buffer_ *new (FILE *data)
+{
+  buffer *buffer_struct = (buffer *)malloc(sizeof(buffer));
+  *buffer_struct = (struct buffer_){.data = readFile(data), .size = getFileSize(data), .offset = 0, .readUint8 = &readUint8, .readUint16 = &readUint16, .readUint32 = &readUint32, .readString = &readString, .freeBuffer = &freeBuffer};
+  return buffer_struct;
 }
 
 const struct BufferClass buffer_ = {.new = &new};
@@ -74,7 +75,7 @@ bytestream readFile(FILE *f)
 
   // rewind  file offset
   rewind(f);
-  bytestream data = (bytestream)calloc(size ,sizeof(char));
+  bytestream data = (bytestream)calloc(size, sizeof(char));
   if (!data)
   {
     printf("malloc error.\n");

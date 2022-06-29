@@ -1,6 +1,7 @@
 #include "keyboard.h"
 
-void initKeyboard(void){
+void initKeyboard(void)
+{
   cbreak();
   noecho();
   nodelay(stdscr, TRUE);

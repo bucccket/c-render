@@ -1,17 +1,21 @@
 #pragma once
 
 #include <stdlib.h>
+#include <stdio.h>
 
-typedef struct graphic_{
+typedef struct graphic_
+{
+  void (*freeBuffer)(struct graphic_ *this);
+
   int sectionSize;
-  const char* name;
-  //TODO: animation based fags like : has matrix, has move, has offset?
-  short x,y;
+  char *name;
+  short x, y;
   short width, height;
   char **data;
   char **mask;
-}graphic;
+} graphic;
 
-extern const struct GraphicClass {
-	graphic* (*new)(void);
+extern const struct GraphicClass
+{
+  graphic *(*new)();
 } graphic_;

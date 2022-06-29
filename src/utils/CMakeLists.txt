@@ -8,4 +8,4 @@ set(UTIL_SRC
    stringutils.c
 )
 
-add_library(utils ${UTIL_HDRS} ${UTIL_SRC})
+add_library(utils SHARED ${UTIL_HDRS} ${UTIL_SRC})

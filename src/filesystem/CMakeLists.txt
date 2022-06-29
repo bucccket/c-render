@@ -8,4 +8,4 @@ set(FS_SRC
    buffered_reader.c
 )
 
-add_library(fs ${FS_HDRS} ${FS_SRC})
+add_library(fs SHARED ${FS_HDRS} ${FS_SRC})

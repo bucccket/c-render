@@ -1,16 +1,21 @@
 #pragma once
 
 #include <stdlib.h>
+#include <stdio.h>
 #include "graphic.h"
 
-typedef struct sprite_{
-  short formatVersion;
-  const char* spriteName;
-  short frameCount;
-  short x,y;
-  graphic **graphics;
-}sprite;
+typedef struct sprite_
+{
+  void (*freeBuffer)(struct sprite_ *this);
 
-extern const struct SpriteClass {
-	sprite* (*new)(const char* spriteName);
+  short formatVersion;
+  char *spriteName;
+  short frameCount;
+  short x, y;
+  graphic **graphics;
+} sprite;
+
+extern const struct SpriteClass
+{
+  sprite *(*new)(char *spriteName);
 } sprite_;

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../graphics/graphic.h"
 #include "../graphics/sprite.h"
+#include "../graphics/graphic.h"
 #include "../utils/stringutils.h"
 #include "buffered_reader.h"
 
@@ -10,8 +10,6 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <unistd.h>
-
-#include<signal.h>
 
 #define FS_OK 0
 #define FS_FILE_ERROR 1
