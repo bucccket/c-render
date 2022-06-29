@@ -54,15 +54,15 @@ int loadSprite(sprite *spriteInst)
       g->data = (char **)calloc(bounds, sizeof(char *));
       if (g->data)
       {
-        for (int i = 0; i < bounds; i++)
+        for (int i = 0; i <= g->height; i++)
         {
-          g->data[i] = (char *)calloc(g->width, sizeof(char*));
+          g->data[i] = (char *)calloc(g->width, sizeof(char *));
           memset(g->data[i], 0, g->width);
         }
       }
       for (int i = 0; i < g->height; i++)
       {
-        sprintf(g->data[i], "%.*s", g->width, data + (g->width * i));
+        memcpy(g->data[i], data + i * g->width, g->width);
       }
 
       char *mask = spriteFile->readString(spriteFile);
@@ -74,15 +74,15 @@ int loadSprite(sprite *spriteInst)
       g->mask = (char **)calloc(bounds, sizeof(char *));
       if (g->mask)
       {
-        for (int i = 0; i < bounds; i++)
+        for (int i = 0; i <= g->height; i++)//memory needs 1 elemsiz extra ?
         {
-          g->mask[i] = (char *)calloc(g->width, sizeof(char*)); 
+          g->mask[i] = (char *)calloc(g->width, sizeof(char *));
           memset(g->mask[i], 0, g->width);
         }
       }
       for (int i = 0; i < g->height; i++)
       {
-        sprintf(g->mask[i], "%.*s", g->width, mask + (g->width * i));
+        memcpy(g->mask[i], mask + i * g->width, g->width);
       }
       spriteInst->graphics[n] = g;
 

@@ -7,6 +7,7 @@ static void freeBuffer(struct sprite_ *this)
     graphic *g = this->graphics[i];
     g->freeBuffer(g);
   }
+  free(this->graphics);
   free(this->spriteName);
   free(this);
 }
