@@ -21,8 +21,10 @@ int loadSprite(sprite *spriteInst)
 
     if (spriteFile->readUint32(spriteFile) != 0xBEEFB055)
     {
+      spriteFile->freeBuffer(spriteFile);
       return FS_HEADER_ERROR;
     }
+
     spriteInst->formatVersion = spriteFile->readUint16(spriteFile);
     spriteInst->spriteName = spriteFile->readString(spriteFile);
     spriteInst->frameCount = spriteFile->readUint16(spriteFile);
@@ -33,7 +35,7 @@ int loadSprite(sprite *spriteInst)
     for (int n = 0; n < spriteInst->frameCount; n++)
     {
       graphic *g = graphic_.new();
-      spriteInst->graphics[n] = g; //shove the pointer in right away. Doesn't matter what happens we need to clean it
+      spriteInst->graphics[n] = g; // shove the pointer in right away. Doesn't matter what happens we need to clean it
       g->sectionSize = spriteFile->readUint32(spriteFile);
       g->name = spriteFile->readString(spriteFile);
       g->x = spriteFile->readUint16(spriteFile);
@@ -76,7 +78,7 @@ int loadSprite(sprite *spriteInst)
       g->mask = (char **)calloc(bounds, sizeof(char *));
       if (g->mask)
       {
-        for (int i = 0; i <= g->height; i++)//memory needs 1 elemsiz extra ?
+        for (int i = 0; i <= g->height; i++) // memory needs 1 elemsiz extra ?
         {
           g->mask[i] = (char *)calloc(g->width, sizeof(char *));
           memset(g->mask[i], 0, g->width);

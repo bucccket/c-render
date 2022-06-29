@@ -1,6 +1,6 @@
 #include "graphic.h"
 
-static void freeBuffer(struct graphic_ *this)
+static void freeBuffer(graphic *this)
 {
   if (this->data && this->mask)
   {
@@ -16,10 +16,10 @@ static void freeBuffer(struct graphic_ *this)
   free(this);
 }
 
-static struct graphic_ *new ()
+static graphic *new ()
 {
   graphic *graphic_ptr = (graphic *)malloc(sizeof(graphic));
-  *graphic_ptr = (struct graphic_){.freeBuffer = &freeBuffer};
+  *graphic_ptr = (graphic){.freeBuffer = &freeBuffer};
   return graphic_ptr;
 }
 

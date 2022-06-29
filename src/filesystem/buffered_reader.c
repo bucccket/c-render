@@ -1,17 +1,17 @@
 #include "buffered_reader.h"
 
-static byte readUint8(struct buffer_ *this)
+static byte readUint8(buffer *this)
 {
   return (byte)this->data[this->offset++];
 }
 
-static word readUint16(struct buffer_ *this)
+static word readUint16(buffer *this)
 {
   return (unsigned short)((byte)this->data[this->offset++] << 0 |
                           (byte)this->data[this->offset++] << 8);
 }
 
-static dword readUint32(struct buffer_ *this)
+static dword readUint32(buffer *this)
 {
   return (unsigned int)((byte)this->data[this->offset++] << 0 |
                         (byte)this->data[this->offset++] << 8 |
@@ -19,7 +19,7 @@ static dword readUint32(struct buffer_ *this)
                         (byte)this->data[this->offset++] << 24);
 }
 
-static char *readString(struct buffer_ *this) // \0 delimted strings
+static char *readString(buffer *this) // \0 delimted strings
 {
   int size = 0;
   do
@@ -29,22 +29,26 @@ static char *readString(struct buffer_ *this) // \0 delimted strings
   char *str = (char *)calloc(size, sizeof(char));
   if (!str)
   {
+    fprintf(stderr,"Error: could not allocate memory for string\n");
     return NULL;
   }
   memcpy(str, this->data + this->offset - size, size - 1);
   return str;
 }
 
-static void *freeBuffer(struct buffer_ *this)
+static void *freeBuffer(buffer *this)
 {
-  free(this->data);
+  if(this->data)
+  {
+    free(this->data);
+  }
   free(this);
 }
 
-static struct buffer_ *new (FILE *data)
+static buffer *new (FILE *data)
 {
   buffer *buffer_struct = (buffer *)malloc(sizeof(buffer));
-  *buffer_struct = (struct buffer_){.data = readFile(data), .size = getFileSize(data), .offset = 0, .readUint8 = &readUint8, .readUint16 = &readUint16, .readUint32 = &readUint32, .readString = &readString, .freeBuffer = &freeBuffer};
+  *buffer_struct = (buffer){.data = readFile(data), .size = getFileSize(data), .offset = 0, .readUint8 = &readUint8, .readUint16 = &readUint16, .readUint32 = &readUint32, .readString = &readString, .freeBuffer = &freeBuffer};
   return buffer_struct;
 }
 
@@ -54,31 +58,28 @@ off_t getFileSize(FILE *f)
 {
   if (fseeko(f, 0, SEEK_END) != 0)
   {
-    printf("reading error SEEK_END\n");
+    fprintf(stderr,"reading error SEEK_END\n");
     return 0;
   }
   off_t size = ftello(f);
   if (fseeko(f, 0, SEEK_SET) != 0)
   {
-    printf("reading error SEEK_SET\n");
+    fprintf(stderr,"reading error SEEK_SET\n");
     return 0;
   }
   return size;
 }
 
-bytestream readFile(FILE *f)
+//TODO: unify bytestream type with all buffer fields
+bytestream readFile(FILE *f) 
 {
-
-  // getting file size by iterating file.
-
   off_t size = getFileSize(f);
 
-  // rewind  file offset
   rewind(f);
   bytestream data = (bytestream)calloc(size, sizeof(char));
   if (!data)
   {
-    printf("malloc error.\n");
+    fprintf(stderr,"Filestream malloc error.\n");
     return NULL;
   }
   fread(data, size, 1, f);

@@ -27,7 +27,7 @@ typedef struct buffer_
 
 extern const struct BufferClass
 {
-  struct buffer_ *(*new)(FILE *data);
+  buffer *(*new)(FILE *data);
 } buffer_;
 
 bytestream readFile(FILE *f);

@@ -8,7 +8,6 @@ static void freeBuffer(sprite *this)
     g->freeBuffer(g);
   }
   free(this->graphics);
-  free(this->spriteName);
   free(this);
 }
 
