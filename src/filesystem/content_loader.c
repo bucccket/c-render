@@ -16,10 +16,7 @@ int loadSprite(sprite *spriteInst)
 
     printf("Loading %s\n", spriteInst->spriteName);
 
-    buffer *spriteFile = buffer_.new(file); // TODO: it is probably sensical to
-                                            //  add the buffer to the struct to
-                                            //  maintian the allocated memory
-                                            //  (optionally it'd be in a global mem pool)
+    buffer *spriteFile = buffer_.new(file);
     // hexdump(spriteFile->data, spriteFile->size);
 
     if (spriteFile->readUint32(spriteFile) != 0xBEEFB055)
