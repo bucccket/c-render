@@ -71,7 +71,8 @@ int parseGraphic(graphic *g, buffer* spriteFile)
     free(data);
     return FS_PARSE_ERROR;
   }
-  int bounds = (g->width+1 * g->height) + 1;
+  int bounds = (g->width * g->height) + g->height;
+
   g->data = (char **)calloc(bounds, sizeof(char *));
   if (g->data)
   {
@@ -93,12 +94,13 @@ int parseGraphic(graphic *g, buffer* spriteFile)
     free(mask);
     return FS_PARSE_ERROR;
   }
+
   g->mask = (char **)calloc(bounds, sizeof(char *));
   if (g->mask)
   {
     for (int i = 0; i <= g->height; i++) // memory needs 1 elemsiz extra ?
     {
-      g->mask[i] = (char *)calloc(g->width, sizeof(char));
+      g->mask[i] = (char *)calloc(g->width+1, sizeof(char));
     }
   }
   for (int i = 0; i < g->height; i++)
@@ -107,6 +109,7 @@ int parseGraphic(graphic *g, buffer* spriteFile)
   }
 
   printf("data ptr %p gdata %p gdata[0] %p which is %s \n",data, g->data,g->data[0],g->data[0]);
+  printf("mask ptr %p gmask %p gmask[0] %p which is %s \n",mask, g->mask,g->mask[0],g->mask[0]);
 
   free(mask);
   free(data);
