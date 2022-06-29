@@ -6,11 +6,13 @@ int testScreenCentering(void)
   int r_old = 0, c_old = 0;
   keys key;
 
-  sprite *test = sprite_.new("animtest_1.spr");
+  sprite *test = sprite_.new("animtest_2.spr");
   int spriteError = loadSprite(test);
   if (spriteError)
   {
     printf("Sprite error ID %d\n", spriteError);
+    test->freeBuffer(test);
+    endwin();
     return RENDER_ERROR_FS;
   }
   int frame = 0;
@@ -37,10 +39,10 @@ int testScreenCentering(void)
 
     if (!adjustScreen(&row, &col, &r_old, &c_old))
     {
-      drawPrimitiveRect(g->data, g->height, x, y);
       mvprintw(row / 2, (col - 13) / 2, "%s", "-> center <-");
       mvprintw(row - 1, 0, "baud rate %d row %d col %d\n", baudrate(), row, col);
       mvprintw(row - 1, col - 1, "e");
+      drawPrimitiveRect(g->data, g->height, x, y);
 
       x_o = x;
       y_o = y;

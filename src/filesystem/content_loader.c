@@ -33,7 +33,7 @@ int loadSprite(sprite *spriteInst)
     for (int n = 0; n < spriteInst->frameCount; n++)
     {
       graphic *g = graphic_.new();
-      //(graphic *)malloc(sizeof(graphic)); // due to linker issue I need ot manually allocate struct :)
+      spriteInst->graphics[n] = g; //shove the pointer in right away. Doesn't matter what happens we need to clean it
       g->sectionSize = spriteFile->readUint32(spriteFile);
       g->name = spriteFile->readString(spriteFile);
       g->x = spriteFile->readUint16(spriteFile);
@@ -81,7 +81,6 @@ int loadSprite(sprite *spriteInst)
       {
         memcpy(g->mask[i], mask + i * g->width, g->width);
       }
-      spriteInst->graphics[n] = g;
 
       free(mask);
       free(data);
