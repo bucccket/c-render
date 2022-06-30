@@ -8,7 +8,7 @@
 #include "../utils/keyboard.h"
 #include "../filesystem/content_loader.h"
 
-#define FPS 30
+#define FPS 10
 
 #define MIN_ROW 50
 #define MIN_COL 100

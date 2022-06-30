@@ -108,8 +108,8 @@ int parseGraphic(graphic *g, buffer* spriteFile)
     memcpy(g->mask[i], mask + i * g->width, g->width);
   }
 
-  printf("data ptr %p gdata %p gdata[0] %p which is %s \n",data, g->data,g->data[0],g->data[0]);
-  printf("mask ptr %p gmask %p gmask[0] %p which is %s \n",mask, g->mask,g->mask[0],g->mask[0]);
+  printf("data ptr %p gdata %p gdata[0] %p\n",data, g->data,g->data[0]);
+  printf("mask ptr %p gmask %p gmask[0] %p\n",mask, g->mask,g->mask[0]);
 
   free(mask);
   free(data);

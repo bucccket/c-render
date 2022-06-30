@@ -6,7 +6,7 @@ int testScreenCentering(void)
   int r_old = 0, c_old = 0;
   keys key;
 
-  sprite *test = sprite_.new("animtest_2.spr");
+  sprite *test = sprite_.new("animtest_5.spr");
   int spriteError = loadSprite(test);
   if (spriteError)
   {
@@ -21,7 +21,7 @@ int testScreenCentering(void)
   int x = 0, y = 5;
   int x_o = 0, y_o = 5;
   int w = test->graphics[0]->width, h = test->graphics[0]->height;
-  int hspeed = 1, vspeed = 0;
+  int hspeed = 0, vspeed = 0;
 
   getchar();
 
@@ -60,7 +60,7 @@ int testScreenCentering(void)
     }
 
     wrefresh(stdscr);
-    drawPrimitiveMask(g->mask, g->height, x_o, y_o);
+    //drawPrimitiveMask(g->mask, g->height, x_o, y_o);
     frame++;
     curs_set(0); /* disable cursor */
   }
