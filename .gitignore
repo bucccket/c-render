@@ -1,6 +1,7 @@
 *~
 *.swp
 *.bak
+*.out
 c-console-render
 .vscode/
 build/

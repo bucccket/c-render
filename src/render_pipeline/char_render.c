@@ -38,10 +38,10 @@ int testScreenCentering(void)
       break;
     }
 
+    mvprintw(row - 1, 0, "baud rate %d row %d col %d\n", baudrate(), row, col);
     if (!adjustScreen(&row, &col, &r_old, &c_old))
     {
       mvprintw(row / 2, (col - 13) / 2, "%s", "-> center <-");
-      mvprintw(row - 1, 0, "baud rate %d row %d col %d\n", baudrate(), row, col);
       mvprintw(row - 1, col - 1, "e");
       drawPrimitiveRect(g->data, g->height, x, y);
 

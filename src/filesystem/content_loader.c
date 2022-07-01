@@ -113,4 +113,5 @@ int parseGraphic(graphic *g, buffer* spriteFile)
 
   free(mask);
   free(data);
+  return 0;
 }
