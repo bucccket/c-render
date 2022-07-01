@@ -8,6 +8,7 @@ typedef struct sprite_
 {
   void (*freeBuffer)(struct sprite_ *this);
 
+  int loaded; //boolean
   short formatVersion;
   char *spriteName;
   short frameCount;

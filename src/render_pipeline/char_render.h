@@ -19,6 +19,8 @@
 
 #define SCREEN_OK 0
 #define SCREEN_TOO_SMALL 1
+#define SCRREN_NO_COLOR 2
+
 
 int testScreenCentering(void); // testing screen proportions
 int adjustScreen(int *row, int *col, int *r_old, int *c_old);
