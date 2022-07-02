@@ -11,7 +11,7 @@
 #define FPS 10
 
 #define MIN_ROW 40
-#define MIN_COL 160
+#define MIN_COL 110
 
 #define RENDER_OK 0
 #define RENDER_CONTINUE 1

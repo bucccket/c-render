@@ -29,7 +29,7 @@ static char *readString(buffer *this) // \0 delimted strings
   char *str = (char *)calloc(size, sizeof(char));
   if (!str)
   {
-    fprintf(stderr,"Error: could not allocate memory for string\n");
+    fprintf(stderr, "Error: could not allocate memory for string\n");
     return NULL;
   }
   memcpy(str, this->data + this->offset - size, size - 1);
@@ -38,7 +38,7 @@ static char *readString(buffer *this) // \0 delimted strings
 
 static void *freeBuffer(buffer *this)
 {
-  if(this->data)
+  if (this->data)
   {
     free(this->data);
   }
@@ -58,20 +58,20 @@ off_t getFileSize(FILE *f)
 {
   if (fseeko(f, 0, SEEK_END) != 0)
   {
-    fprintf(stderr,"reading error SEEK_END\n");
+    fprintf(stderr, "reading error SEEK_END\n");
     return 0;
   }
   off_t size = ftello(f);
   if (fseeko(f, 0, SEEK_SET) != 0)
   {
-    fprintf(stderr,"reading error SEEK_SET\n");
+    fprintf(stderr, "reading error SEEK_SET\n");
     return 0;
   }
   return size;
 }
 
-//TODO: unify bytestream type with all buffer fields
-bytestream readFile(FILE *f) 
+// TODO: unify bytestream type with all buffer fields
+bytestream readFile(FILE *f)
 {
   off_t size = getFileSize(f);
 
@@ -79,10 +79,16 @@ bytestream readFile(FILE *f)
   bytestream data = (bytestream)calloc(size, sizeof(char));
   if (!data)
   {
-    fprintf(stderr,"Filestream malloc error.\n");
+    fprintf(stderr, "Filestream malloc error.\n");
     return NULL;
   }
   fread(data, size, 1, f);
   fclose(f);
+
+  // TODO: read data (malloced.)
+  // inflate in zlib struct
+  // realloc data to inflated buffer
+  // write zlib struct data to reallocated buffer
+
   return data;
 }

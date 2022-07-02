@@ -10,3 +10,4 @@ set(FS_SRC
 
 add_library(fs SHARED ${FS_HDRS} ${FS_SRC})
 target_link_libraries(fs graphics)
+target_link_libraries(fs z)

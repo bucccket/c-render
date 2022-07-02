@@ -31,7 +31,9 @@ int loadSprite(sprite *spriteInst)
     }
 
     spriteInst->formatVersion = spriteFile->readUint16(spriteFile);
-    spriteInst->spriteName = spriteFile->readString(spriteFile);
+    char *name = spriteFile->readString(spriteFile);
+    free(spriteInst->spriteName);
+    spriteInst->spriteName = name;
     spriteInst->frameCount = spriteFile->readUint16(spriteFile);
     spriteInst->graphics = calloc(spriteInst->frameCount, sizeof(graphic *));
     spriteInst->x = spriteFile->readUint16(spriteFile);
@@ -42,7 +44,7 @@ int loadSprite(sprite *spriteInst)
       graphic *g = graphic_.new();
       spriteInst->graphics[n] = g; // shove the pointer in right away. Doesn't matter what happens we need to clean it
       int parseErr = parseGraphic(g, spriteFile);
-      if(parseErr != FS_OK)
+      if (parseErr != FS_OK)
       {
         spriteFile->freeBuffer(spriteFile);
         return parseErr;
@@ -50,10 +52,11 @@ int loadSprite(sprite *spriteInst)
     }
     spriteFile->freeBuffer(spriteFile);
   }
+  spriteInst->loaded = 1;
   return FS_OK;
 }
 
-int parseGraphic(graphic *g, buffer* spriteFile)
+int parseGraphic(graphic *g, buffer *spriteFile)
 {
   g->sectionSize = spriteFile->readUint32(spriteFile);
   g->name = spriteFile->readString(spriteFile);
@@ -62,12 +65,11 @@ int parseGraphic(graphic *g, buffer* spriteFile)
   g->width = spriteFile->readUint16(spriteFile);
   g->height = spriteFile->readUint16(spriteFile);
 
-
-  printf("ofs %d w %d h%d\n", spriteFile->offset,g->width, g->height);
+  printf("ofs %d w %d h%d\n", spriteFile->offset, g->width, g->height);
   char *data = spriteFile->readString(spriteFile);
   if (g->width * g->height < strlen(data))
   {
-    fprintf(stderr, "[FATAL ERROR] graphic data oob! check width and height\noffs %08lx w%d h%d\n",spriteFile->offset,g->width,g->height);
+    fprintf(stderr, "[FATAL ERROR] graphic data oob! check width and height\noffs %8x w%d h%d\n", spriteFile->offset, g->width, g->height);
     free(data);
     return FS_PARSE_ERROR;
   }
@@ -78,12 +80,12 @@ int parseGraphic(graphic *g, buffer* spriteFile)
   {
     for (int i = 0; i <= g->height; i++)
     {
-      g->data[i] = (char *)calloc(g->width+1, sizeof(char));
+      g->data[i] = (char *)calloc(g->width + 1, sizeof(char));
     }
   }
   for (int i = 0; i < g->height; i++)
   {
-    memcpy(g->data[i], data + i * g->width+1, g->width);
+    memcpy(g->data[i], data + i * g->width + 1, g->width);
   }
 
   char *mask = spriteFile->readString(spriteFile);
@@ -100,7 +102,7 @@ int parseGraphic(graphic *g, buffer* spriteFile)
   {
     for (int i = 0; i <= g->height; i++) // memory needs 1 elemsiz extra ?
     {
-      g->mask[i] = (char *)calloc(g->width+1, sizeof(char));
+      g->mask[i] = (char *)calloc(g->width + 1, sizeof(char));
     }
   }
   for (int i = 0; i < g->height; i++)
@@ -108,8 +110,8 @@ int parseGraphic(graphic *g, buffer* spriteFile)
     memcpy(g->mask[i], mask + i * g->width, g->width);
   }
 
-  printf("data ptr %p gdata %p gdata[0] %p\n",data, g->data,g->data[0]);
-  printf("mask ptr %p gmask %p gmask[0] %p\n",mask, g->mask,g->mask[0]);
+  printf("data ptr %p gdata %p gdata[0] %p\n", data, g->data, g->data[0]);
+  printf("mask ptr %p gmask %p gmask[0] %p\n", mask, g->mask, g->mask[0]);
 
   free(mask);
   free(data);

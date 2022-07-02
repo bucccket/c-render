@@ -5,5 +5,6 @@
 c-console-render
 .vscode/
 build/
+include/zlib-1.2.12/
 lib/
 bin/c-render

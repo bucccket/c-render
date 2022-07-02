@@ -2,6 +2,9 @@
 
 static void freeBuffer(sprite *this)
 {
+  if(!this->loaded){
+    printf("[ERROR] tried freeing a sprite that was not loaded!\n");
+  }
   for (int i = 0; i < this->frameCount; i++)
   {
     graphic *g = this->graphics[i];
