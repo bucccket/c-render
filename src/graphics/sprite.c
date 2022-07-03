@@ -8,7 +8,9 @@ static void freeBuffer(sprite *this)
   for (int i = 0; i < this->frameCount; i++)
   {
     graphic *g = this->graphics[i];
-    g->freeBuffer(g);
+    if(g){
+      g->freeBuffer(g);
+    }
   }
   free(this->graphics);
   free(this->spriteName);

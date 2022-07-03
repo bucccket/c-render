@@ -6,11 +6,10 @@ int testScreenCentering(void)
   int r_old = 0, c_old = 0;
   keys key;
 
-  sprite *test = sprite_.new("animtest_5.spr");
+  sprite *test = sprite_.new("animtest_1.cpr");
   int spriteError = loadSprite(test);
   if (spriteError)
   {
-    fprintf(stderr,"Sprite error ID %d\n", spriteError);
     test->freeBuffer(test);
     endwin();
      

@@ -7,6 +7,7 @@ int loadSprite(sprite *spriteInst)
   if (access(spriteFileName, F_OK) != 0)
   {
     fprintf(stderr, "[ERROR] Couldnt access file %s\n", spriteFileName);
+    free(spriteFileName);
     return FS_FILE_ERROR;
   }
   else
@@ -15,6 +16,8 @@ int loadSprite(sprite *spriteInst)
     if (file < 0)
     {
       fprintf(stderr, "[ERROR] Couldnt find file %s\n", spriteFileName);
+      free(spriteFileName);
+      fclose(file);
       return FS_FILE_ERROR;
     }
     free(spriteFileName);
@@ -22,13 +25,17 @@ int loadSprite(sprite *spriteInst)
     printf("Loading %s\n", spriteInst->spriteName);
 
     buffer *spriteFile = buffer_.new(file);
-    // hexdump(spriteFile->data, spriteFile->size);
-
-    if (spriteFile->readUint32(spriteFile) != 0xBEEFB055)
+    if (!spriteFile->data)
     {
+      fprintf(stderr, "[ERROR] Couldnt load file %s\n", spriteInst->spriteName);
       spriteFile->freeBuffer(spriteFile);
-      return FS_HEADER_ERROR;
+      return FS_FILE_ERROR;
     }
+    hexdump(spriteFile->data, spriteFile->size);
+    spriteFile->offset=4; //TODO: FIX OFFSET ISSUE (spr has no header in data CPR HAS header still)
+
+
+    printf("buffer offs at 0x%08X\n",spriteFile->offset);
 
     spriteInst->formatVersion = spriteFile->readUint16(spriteFile);
     char *name = spriteFile->readString(spriteFile);
@@ -65,11 +72,11 @@ int parseGraphic(graphic *g, buffer *spriteFile)
   g->width = spriteFile->readUint16(spriteFile);
   g->height = spriteFile->readUint16(spriteFile);
 
-  printf("ofs %d w %d h%d\n", spriteFile->offset, g->width, g->height);
+  printf("ofs 0x%08X w %d h %d\n", spriteFile->offset, g->width, g->height);
   char *data = spriteFile->readString(spriteFile);
   if (g->width * g->height < strlen(data))
   {
-    fprintf(stderr, "[FATAL ERROR] graphic data oob! check width and height\noffs %8x w%d h%d\n", spriteFile->offset, g->width, g->height);
+    fprintf(stderr, "[ERROR] graphic data oob! check width and height\noffs %8x w%d h%d\n", spriteFile->offset, g->width, g->height);
     free(data);
     return FS_PARSE_ERROR;
   }
@@ -91,7 +98,7 @@ int parseGraphic(graphic *g, buffer *spriteFile)
   char *mask = spriteFile->readString(spriteFile);
   if (g->width * g->height < strlen(data))
   {
-    fprintf(stderr, "[FATAL ERROR] graphic mask oob! check width and height\n");
+    fprintf(stderr, "[ERROR] graphic mask oob! check width and height\n");
     free(data);
     free(mask);
     return FS_PARSE_ERROR;
