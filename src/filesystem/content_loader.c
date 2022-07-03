@@ -31,9 +31,7 @@ int loadSprite(sprite *spriteInst)
       spriteFile->freeBuffer(spriteFile);
       return FS_FILE_ERROR;
     }
-    hexdump(spriteFile->data, spriteFile->size);
-    spriteFile->offset=4; //TODO: FIX OFFSET ISSUE (spr has no header in data CPR HAS header still)
-
+    //hexdump(spriteFile->data, spriteFile->size);    
 
     printf("buffer offs at 0x%08X\n",spriteFile->offset);
 
@@ -71,6 +69,11 @@ int parseGraphic(graphic *g, buffer *spriteFile)
   g->y = spriteFile->readUint16(spriteFile);
   g->width = spriteFile->readUint16(spriteFile);
   g->height = spriteFile->readUint16(spriteFile);
+
+  if(g->width <= 0 || g->height <= 0){
+    fprintf(stderr, "[ERROR] invalid width and height w%d h%d\n", spriteFile->offset, g->width, g->height);
+    return FS_PARSE_ERROR;
+  }
 
   printf("ofs 0x%08X w %d h %d\n", spriteFile->offset, g->width, g->height);
   char *data = spriteFile->readString(spriteFile);

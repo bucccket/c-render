@@ -67,7 +67,6 @@ off_t getFileSize(FILE *f)
   {
     int *szInflate = calloc(1, sizeof(int));
     fread(szInflate, sizeof(unsigned int), 1, f); // uncompressed sz
-    printf("size %d\n", *szInflate);
     size = *szInflate;
     free(szInflate);
   }
@@ -124,7 +123,6 @@ bytestream readFile(FILE *f)
     printf("[INFO] compressed sprite found\n");
     fread(szInflate, sizeof(unsigned int), 1, f); // uncompressed sz
     fread(szDeflate, sizeof(unsigned int), 1, f); // compressed sz
-    printf("szInflate: %ld szDeflate %ld\n", *szInflate, *szDeflate);
     char *deflatedStream = (bytestream)calloc(*szDeflate, sizeof(char));
     fread(deflatedStream, size, 1, f);
     data = (char *)realloc(data, *szInflate); // realloc data buffer to fit the infalted data
@@ -132,18 +130,28 @@ bytestream readFile(FILE *f)
     {
     case Z_BUF_ERROR:
       fprintf(stderr, "[ERROR] zlib failed - buffer corrupted or truncated\n");
+      goto end_err;
       break;
     case Z_MEM_ERROR:
       fprintf(stderr, "[ERROR] zlib failed - memory ran out or stack smash occured\n");
+      goto end_err;
       break;
     case Z_DATA_ERROR:
       fprintf(stderr, "[ERROR] zlib failed - false zlib header\n");
+      goto end_err;
       break;
     case Z_OK:
       printf("[INFO] zlib success\n");
       break;
     default:
       printf("[WARN] zlib failed - unknown error code\n");
+    end_err:
+      free(data);
+      free(header);
+      free(szDeflate);
+      free(szInflate);
+      free(deflatedStream);
+      return NULL;
     }
     free(deflatedStream);
     break;

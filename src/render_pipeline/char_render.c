@@ -6,7 +6,7 @@ int testScreenCentering(void)
   int r_old = 0, c_old = 0;
   keys key;
 
-  sprite *test = sprite_.new("animtest_1.cpr");
+  sprite *test = sprite_.new("test/animtest_2.cpr");
   int spriteError = loadSprite(test);
   if (spriteError)
   {
@@ -17,7 +17,7 @@ int testScreenCentering(void)
   }
   int frame = 0;
 
-  int x = 0, y = 5;
+  int x = 5, y = 5;
   int x_o = 0, y_o = 5;
   int w = test->graphics[0]->width, h = test->graphics[0]->height;
   int hspeed = 0, vspeed = 0;
