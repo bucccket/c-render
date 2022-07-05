@@ -6,29 +6,29 @@ int testScreenCentering(void)
   int r_old = 0, c_old = 0;
   keys key;
 
-  sprite *test = sprite_.new("test/animtest_2.cpr");
+  sprite *test = sprite_.new("test/animtest_8.spr");
   int spriteError = loadSprite(test);
   if (spriteError)
   {
     test->freeBuffer(test);
     endwin();
-     
+
     return RENDER_ERROR_FS;
   }
   int frame = 0;
 
-  int x = 5, y = 5;
+  int x = 0, y = 0;
   int x_o = 0, y_o = 5;
   int w = test->graphics[0]->width, h = test->graphics[0]->height;
   int hspeed = 0, vspeed = 0;
 
   getchar();
-
-  initscr();      /* start the curses mode */
-  initKeyboard(); /* start keyboard nodelay for stdscr */
+  setlocale(LC_CTYPE, "C-UTF-8"); /* inititalizing locale */
+  initscr();                      /* start the curses mode */
+  initKeyboard();                 /* start keyboard nodelay for stdscr */
   while (true)
   {
-    usleep(1000000 / FPS);                                 // halt execution for 17ms => 60fps
+    usleep(1000000 / FPS); // halt execution for 17ms => 60fps
     graphic *g = test->graphics[frame % test->frameCount]; // advance frame
 
     int keyStatus = keyHandle(&key);
@@ -43,6 +43,14 @@ int testScreenCentering(void)
       mvprintw(row / 2, (col - 13) / 2, "%s", "-> center <-");
       mvprintw(row - 1, col - 1, "e");
       drawPrimitiveRect(g->data, g->height, x, y);
+      drawPrimitiveRect(g->data, g->height, x+g->width, y);
+      drawPrimitiveRect(g->data, g->height, x+(g->width*2), y);
+      drawPrimitiveRect(g->data, g->height, x, y+g->height);
+      drawPrimitiveRect(g->data, g->height, x+g->width, y+g->height);
+      drawPrimitiveRect(g->data, g->height, x+(g->width*2), y+g->height);
+      drawPrimitiveRect(g->data, g->height, x, y+(g->height*2));
+      drawPrimitiveRect(g->data, g->height, x+g->width, y+(g->height*2));
+      drawPrimitiveRect(g->data, g->height, x+(g->width*2), y+(g->height*2));
 
       x_o = x;
       y_o = y;
@@ -59,7 +67,7 @@ int testScreenCentering(void)
     }
 
     wrefresh(stdscr);
-    //drawPrimitiveMask(g->mask, g->height, x_o, y_o);
+    // drawPrimitiveMask(g->mask, g->height, x_o, y_o);
     frame++;
     curs_set(0); /* disable cursor */
   }

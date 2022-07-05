@@ -31,9 +31,7 @@ int loadSprite(sprite *spriteInst)
       spriteFile->freeBuffer(spriteFile);
       return FS_FILE_ERROR;
     }
-    //hexdump(spriteFile->data, spriteFile->size);    
-
-    printf("buffer offs at 0x%08X\n",spriteFile->offset);
+    // hexdump(spriteFile->data, spriteFile->size);
 
     spriteInst->formatVersion = spriteFile->readUint16(spriteFile);
     char *name = spriteFile->readString(spriteFile);
@@ -51,6 +49,7 @@ int loadSprite(sprite *spriteInst)
       int parseErr = parseGraphic(g, spriteFile);
       if (parseErr != FS_OK)
       {
+        fprintf(stderr, "[ERROR] graphic parsing failed with error %d\n", parseErr);
         spriteFile->freeBuffer(spriteFile);
         return parseErr;
       }
@@ -70,22 +69,36 @@ int parseGraphic(graphic *g, buffer *spriteFile)
   g->width = spriteFile->readUint16(spriteFile);
   g->height = spriteFile->readUint16(spriteFile);
 
-  if(g->width <= 0 || g->height <= 0){
-    fprintf(stderr, "[ERROR] invalid width and height w%d h%d\n", spriteFile->offset, g->width, g->height);
+  if (g->width <= 0 || g->height <= 0)
+  {
+    fprintf(stderr, "[ERROR] invalid width and height w%d h%d at %d\n", g->width, g->height,spriteFile->offset);
     return FS_PARSE_ERROR;
   }
 
-  printf("ofs 0x%08X w %d h %d\n", spriteFile->offset, g->width, g->height);
+  parseData(spriteFile, g);
+  parseMask(spriteFile, g);
+
+  return 0;
+}
+
+int parseData(buffer *spriteFile, graphic *g)
+{
+  int bounds = (g->width * g->height) + g->height; // bounds with line endings for each line!
   char *data = spriteFile->readString(spriteFile);
-  if (g->width * g->height < strlen(data))
+
+  if (g->width * g->height != strlen(data))
   {
-    fprintf(stderr, "[ERROR] graphic data oob! check width and height\noffs %8x w%d h%d\n", spriteFile->offset, g->width, g->height);
-    free(data);
-    return FS_PARSE_ERROR;
+    fprintf(stderr, "[WARN] graphic data does not fit bounds\n");
+    if (g->width * g->height < strlen(data))
+    {
+      fprintf(stderr, "[ERROR] graphic data does not fit bounds: offs %8x w%d h%d\n", spriteFile->offset, g->width, g->height);
+      free(data);
+      return FS_PARSE_ERROR;
+    }
   }
-  int bounds = (g->width * g->height) + g->height;
 
   g->data = (char **)calloc(bounds, sizeof(char *));
+
   if (g->data)
   {
     for (int i = 0; i <= g->height; i++)
@@ -98,16 +111,29 @@ int parseGraphic(graphic *g, buffer *spriteFile)
     memcpy(g->data[i], data + i * g->width + 1, g->width);
   }
 
+  //printf("data ptr %p gdata %p gdata[0] %p\n", data, g->data, g->data[0]);
+  free(data);
+  return FS_OK;
+}
+
+int parseMask(buffer *spriteFile, graphic *g)
+{
+  int bounds = (g->width * g->height) + g->height; // bounds with line endings for each line!
   char *mask = spriteFile->readString(spriteFile);
-  if (g->width * g->height < strlen(data))
+
+  if (g->width * g->height < strlen(mask))
   {
-    fprintf(stderr, "[ERROR] graphic mask oob! check width and height\n");
-    free(data);
-    free(mask);
-    return FS_PARSE_ERROR;
+    fprintf(stderr, "[WARN] mask data does not fit bounds\n");
+    if (g->width * g->height < strlen(mask))
+    {
+      fprintf(stderr, "[ERROR] mask oob! check width and height\n");
+      free(mask);
+      return FS_PARSE_ERROR;
+    }
   }
 
   g->mask = (char **)calloc(bounds, sizeof(char *));
+
   if (g->mask)
   {
     for (int i = 0; i <= g->height; i++) // memory needs 1 elemsiz extra ?
@@ -120,10 +146,7 @@ int parseGraphic(graphic *g, buffer *spriteFile)
     memcpy(g->mask[i], mask + i * g->width, g->width);
   }
 
-  printf("data ptr %p gdata %p gdata[0] %p\n", data, g->data, g->data[0]);
-  printf("mask ptr %p gmask %p gmask[0] %p\n", mask, g->mask, g->mask[0]);
-
+  //printf("mask ptr %p gmask %p gmask[0] %p\n", mask, g->mask, g->mask[0]);
   free(mask);
-  free(data);
-  return 0;
+  return FS_OK;
 }

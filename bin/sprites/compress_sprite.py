@@ -1,7 +1,7 @@
 from fileinput import close
 import zlib
 
-target = "animtest_5.spr"
+target = "animtest_6.spr"
 
 dInflated = open(target,"rb").read()
 szInflate = len(dInflated)
