@@ -6,7 +6,7 @@ int testScreenCentering(void)
   int r_old = 0, c_old = 0;
   keys key;
 
-  sprite *test = sprite_.new("test/animtest_8.spr");
+  sprite *test = sprite_.new("test/animtest_2_mask.spr");
   int spriteError = loadSprite(test);
   if (spriteError)
   {
@@ -18,9 +18,9 @@ int testScreenCentering(void)
   int frame = 0;
 
   int x = 0, y = 0;
-  int x_o = 0, y_o = 5;
+  int x_o = x, y_o = y;
   int w = test->graphics[0]->width, h = test->graphics[0]->height;
-  int hspeed = 0, vspeed = 0;
+  int hspeed = 1, vspeed = 1;
 
   getchar();
   setlocale(LC_CTYPE, "C-UTF-8"); /* inititalizing locale */
@@ -29,7 +29,7 @@ int testScreenCentering(void)
   while (true)
   {
     usleep(1000000 / FPS); // halt execution for 17ms => 60fps
-    graphic *g = test->graphics[frame % test->frameCount]; // advance frame
+    graphic *g = test->graphics[0]; // advance frame
 
     int keyStatus = keyHandle(&key);
     if (keyStatus != RENDER_CONTINUE)
@@ -42,15 +42,7 @@ int testScreenCentering(void)
     {
       mvprintw(row / 2, (col - 13) / 2, "%s", "-> center <-");
       mvprintw(row - 1, col - 1, "e");
-      drawPrimitiveRect(g->data, g->height, x, y);
-      drawPrimitiveRect(g->data, g->height, x+g->width, y);
-      drawPrimitiveRect(g->data, g->height, x+(g->width*2), y);
-      drawPrimitiveRect(g->data, g->height, x, y+g->height);
-      drawPrimitiveRect(g->data, g->height, x+g->width, y+g->height);
-      drawPrimitiveRect(g->data, g->height, x+(g->width*2), y+g->height);
-      drawPrimitiveRect(g->data, g->height, x, y+(g->height*2));
-      drawPrimitiveRect(g->data, g->height, x+g->width, y+(g->height*2));
-      drawPrimitiveRect(g->data, g->height, x+(g->width*2), y+(g->height*2));
+      drawMaskedRect(g->data, g->mask, g->width, g->height, x, y);
 
       x_o = x;
       y_o = y;
@@ -67,7 +59,7 @@ int testScreenCentering(void)
     }
 
     wrefresh(stdscr);
-    // drawPrimitiveMask(g->mask, g->height, x_o, y_o);
+    clearMaskedRect(g->mask, g->width, g->height, x_o, y_o);
     frame++;
     curs_set(0); /* disable cursor */
   }
@@ -124,11 +116,54 @@ void drawPrimitiveRect(char **data, int lines, int x, int y)
   }
 }
 
-void drawPrimitiveMask(char **data, int lines, int x, int y)
+void drawMaskedRect(char **data, char **mask, int width, int height, int x, int y)
 {
-  // will add mask behaviours
-  for (int i = 0; i <= lines; i++)
+  for (int py = 0; py < height; py++)
   {
-    mvprintw(y + i, x, data[i]);
+    for (int px = 0; px < width; px++)
+    {
+      move(y+py,x+px);
+      if(mask[py][px]=='x'){
+        addch(data[py][px]);
+      }
+    }
   }
+}
+
+void clearMaskedRect(char **mask, int width, int height, int x, int y)
+{
+  for (int py = 0; py <= height; py++)
+  {
+    for (int px = 0; px <= width; px++)
+    {
+      move(y+py,x+px);
+      if(mask[py][px]!='x'){
+        addch(' ');
+      }
+    }
+  }
+}
+
+int rr(int lower, int upper){
+  return (rand() % (upper - lower + 1)) + lower;
+}
+
+void testPrintTime(){
+  initscr ();
+  getchar();
+  clock_t begin, end;
+  begin = clock();
+  for(long i = 0; i<10000000; i++){
+    mvprintw (0, 0, "%c",(char)rr('A','Z'));
+    if(i%1000==0){
+      refresh();
+    }
+  }
+  end = clock();
+  long timeTot = (double)(end-begin);
+  mvprintw(0,0,"time taken %ldµs\ntime per iteration %lfµs",timeTot,((double)timeTot/10000000));
+  refresh();
+  getchar();
+  endwin();
+
 }

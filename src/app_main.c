@@ -37,6 +37,7 @@ void parseArgs(int argc, char *argv[]);
 int main(int argc, char *argv[])
 {
   parseArgs(argc, argv);
+  //testPrintTime();
   testScreenCentering();
   printf("end.\n");
 

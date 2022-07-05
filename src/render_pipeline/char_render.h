@@ -9,7 +9,7 @@
 #include "../utils/keyboard.h"
 #include "../filesystem/content_loader.h"
 
-#define FPS 60
+#define FPS 8
 
 #define MIN_COL 80 //width
 #define MIN_ROW 24 //height
@@ -25,5 +25,8 @@
 int testScreenCentering(void); // testing screen proportions
 int adjustScreen(int *row, int *col, int *r_old, int *c_old);
 void drawPrimitiveRect(char **data, int lines, int x, int y);
-void drawPrimitiveMask(char **data, int lines, int x, int y);
+void drawMaskedRect(char **data, char **mask, int width, int height, int x, int y);
+void clearMaskedRect(char **mask, int width, int height, int x, int y);
 int keyHandle(keys *key);
+
+void testPrintTime();
