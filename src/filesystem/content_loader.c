@@ -71,7 +71,7 @@ int parseGraphic(graphic *g, buffer *spriteFile)
 
   if (g->width <= 0 || g->height <= 0)
   {
-    fprintf(stderr, "[ERROR] invalid width and height w%d h%d at %d\n", g->width, g->height,spriteFile->offset);
+    fprintf(stderr, "[ERROR] invalid width and height w%d h%d at %d\n", g->width, g->height, spriteFile->offset);
     return FS_PARSE_ERROR;
   }
 
@@ -108,10 +108,10 @@ int parseData(buffer *spriteFile, graphic *g)
   }
   for (int i = 0; i < g->height; i++)
   {
-    memcpy(g->data[i], data + i * g->width + 1, g->width);
+    memcpy(g->data[i], data + i * g->width, g->width);
   }
 
-  //printf("data ptr %p gdata %p gdata[0] %p\n", data, g->data, g->data[0]);
+  // printf("data ptr %p gdata %p gdata[0] %p\n", data, g->data, g->data[0]);
   free(data);
   return FS_OK;
 }
@@ -146,7 +146,7 @@ int parseMask(buffer *spriteFile, graphic *g)
     memcpy(g->mask[i], mask + i * g->width, g->width);
   }
 
-  //printf("mask ptr %p gmask %p gmask[0] %p\n", mask, g->mask, g->mask[0]);
+  // printf("mask ptr %p gmask %p gmask[0] %p\n", mask, g->mask, g->mask[0]);
   free(mask);
   return FS_OK;
 }

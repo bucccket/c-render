@@ -7,8 +7,9 @@ int testScreenCentering(void)
   keys key;
 
   sprite *test = sprite_.new("test/animtest_2_mask.spr");
-  int spriteError = loadSprite(test);
-  if (spriteError)
+  sprite *test2 = sprite_.new("debug/center.spr");
+
+  if (loadSprite(test) || loadSprite(test2))
   {
     test->freeBuffer(test);
     endwin();
@@ -30,6 +31,7 @@ int testScreenCentering(void)
   {
     usleep(1000000 / FPS); // halt execution for 17ms => 60fps
     graphic *g = test->graphics[0]; // advance frame
+    graphic *g2 = test2->graphics[frame%test2->frameCount]; // advance frame
 
     int keyStatus = keyHandle(&key);
     if (keyStatus != RENDER_CONTINUE)
@@ -40,28 +42,25 @@ int testScreenCentering(void)
     mvprintw(row - 1, 0, "baud rate %d row %d col %d\n", baudrate(), row, col);
     if (!adjustScreen(&row, &col, &r_old, &c_old))
     {
-      mvprintw(row / 2, (col - 13) / 2, "%s", "-> center <-");
-      mvprintw(row - 1, col - 1, "e");
+      drawPrimitiveRect(g2->data, g2->height, (col / 2) - 14, (row / 2)-1);
       drawMaskedRect(g->data, g->mask, g->width, g->height, x, y);
 
-      x_o = x;
-      y_o = y;
       x += hspeed;
       y += vspeed;
       if (x >= (col - w - 1) || x < 0)
       {
         hspeed = -hspeed;
       }
-      if (y > (row - h) || y < 0)
+      if (y > (row - h - 1) || y < 0)
       {
         vspeed = -vspeed;
       }
     }
 
-    wrefresh(stdscr);
-    clearMaskedRect(g->mask, g->width, g->height, x_o, y_o);
+    refresh();
+    
+    clearMaskedRect(g->mask, g->width, g->height, x, y);
     frame++;
-    curs_set(0); /* disable cursor */
   }
   // TODO: free sprite
   test->freeBuffer(test);
@@ -120,7 +119,7 @@ void drawMaskedRect(char **data, char **mask, int width, int height, int x, int 
 {
   for (int py = 0; py < height; py++)
   {
-    for (int px = 0; px < width; px++)
+    for (int px = 0; px <= width; px++)
     {
       move(y+py,x+px);
       if(mask[py][px]=='x'){
@@ -144,10 +143,13 @@ void clearMaskedRect(char **mask, int width, int height, int x, int y)
   }
 }
 
+
+//TEMORARY FUNCTION
 int rr(int lower, int upper){
   return (rand() % (upper - lower + 1)) + lower;
 }
 
+//TEMPORARY TEST
 void testPrintTime(){
   initscr ();
   getchar();
