@@ -1,0 +1,7 @@
+---GENERAL---
+see if you can write an override func without corrupting a function pointer maybeeee
+
+
+---buffered_reader.c---
+// TODO: unify bytestream type with all buffer fields
+

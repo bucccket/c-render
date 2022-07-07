@@ -29,12 +29,11 @@ int testScreenCentering(void)
   initKeyboard();                 /* start keyboard nodelay for stdscr */
   while (true)
   {
-    usleep(1000000 / FPS); // halt execution for 17ms => 60fps
-    graphic *g = test->graphics[0]; // advance frame
-    graphic *g2 = test2->graphics[frame%test2->frameCount]; // advance frame
+    usleep(1000000 / FPS);                                    // halt execution for 17ms => 60fps
+    graphic *g = test->graphics[0];                           // advance frame
+    graphic *g2 = test2->graphics[frame % test2->frameCount]; // advance frame
 
-    int keyStatus = keyHandle(&key);
-    if (keyStatus != RENDER_CONTINUE)
+    if (keyHandle(&key) != RENDER_CONTINUE)
     {
       break;
     }
@@ -42,7 +41,7 @@ int testScreenCentering(void)
     mvprintw(row - 1, 0, "baud rate %d row %d col %d\n", baudrate(), row, col);
     if (!adjustScreen(&row, &col, &r_old, &c_old))
     {
-      drawPrimitiveRect(g2->data, g2->height, (col / 2) - 14, (row / 2)-1);
+      drawPrimitiveRect(g2->data, g2->height, (col >> 1) - 14, (row >> 1) - 1); // fast 2 division bc yes
       drawMaskedRect(g->data, g->mask, g->width, g->height, x, y);
 
       x += hspeed;
@@ -58,12 +57,12 @@ int testScreenCentering(void)
     }
 
     refresh();
-    
+
     clearMaskedRect(g->mask, g->width, g->height, x, y);
     frame++;
   }
-  // TODO: free sprite
   test->freeBuffer(test);
+  test2->freeBuffer(test2);
   endwin();
   printf("got here\n");
   return RENDER_OK;
@@ -101,7 +100,7 @@ int adjustScreen(int *row, int *col, int *r_old, int *c_old)
   if (*row < MIN_ROW || *col < MIN_COL)
   {
     char *mesg = "Screen too small";
-    mvprintw(*row / 2, (*col - strlen(mesg)) / 2, "%s", mesg);
+    mvprintw(*row >> 1, (*col - strlen(mesg)) >> 1, "%s", mesg);
     return SCREEN_TOO_SMALL;
   }
   return SCREEN_OK;
@@ -117,12 +116,13 @@ void drawPrimitiveRect(char **data, int lines, int x, int y)
 
 void drawMaskedRect(char **data, char **mask, int width, int height, int x, int y)
 {
-  for (int py = 0; py < height; py++)
+  for (int py = 0; py <= height; py++)
   {
     for (int px = 0; px <= width; px++)
     {
-      move(y+py,x+px);
-      if(mask[py][px]=='x'){
+      if (mask[py][px] == 'x')
+      {
+        move(y + py, x + px);
         addch(data[py][px]);
       }
     }
@@ -134,38 +134,12 @@ void clearMaskedRect(char **mask, int width, int height, int x, int y)
   for (int py = 0; py <= height; py++)
   {
     for (int px = 0; px <= width; px++)
-    {
-      move(y+py,x+px);
-      if(mask[py][px]!='x'){
+    {      
+      if (mask[py][px] != 'x')
+      {
+        move(y + py, x + px);
         addch(' ');
       }
     }
   }
-}
-
-
-//TEMORARY FUNCTION
-int rr(int lower, int upper){
-  return (rand() % (upper - lower + 1)) + lower;
-}
-
-//TEMPORARY TEST
-void testPrintTime(){
-  initscr ();
-  getchar();
-  clock_t begin, end;
-  begin = clock();
-  for(long i = 0; i<10000000; i++){
-    mvprintw (0, 0, "%c",(char)rr('A','Z'));
-    if(i%1000==0){
-      refresh();
-    }
-  }
-  end = clock();
-  long timeTot = (double)(end-begin);
-  mvprintw(0,0,"time taken %ldµs\ntime per iteration %lfµs",timeTot,((double)timeTot/10000000));
-  refresh();
-  getchar();
-  endwin();
-
 }

@@ -25,6 +25,7 @@
 int testScreenCentering(void); // testing screen proportions
 int adjustScreen(int *row, int *col, int *r_old, int *c_old);
 void drawPrimitiveRect(char **data, int lines, int x, int y);
+
 void drawMaskedRect(char **data, char **mask, int width, int height, int x, int y);
 void clearMaskedRect(char **mask, int width, int height, int x, int y);
 int keyHandle(keys *key);

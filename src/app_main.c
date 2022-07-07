@@ -31,14 +31,15 @@
 #include <stdlib.h>
 
 #include "render_pipeline/char_render.h"
+#include "utils/sprite_edit.h"
 
 void parseArgs(int argc, char *argv[]);
 
 int main(int argc, char *argv[])
 {
   parseArgs(argc, argv);
-  //testPrintTime();
-  testScreenCentering();
+  //testScreenCentering();
+  spriteEdit();
   printf("end.\n");
 
   return EXIT_SUCCESS;

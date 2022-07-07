@@ -18,7 +18,7 @@ typedef struct buffer_
   byte (*readUint8)(struct buffer_ *this);
   word (*readUint16)(struct buffer_ *this);
   dword (*readUint32)(struct buffer_ *this);
-  char *(*readString)(struct buffer_ *this); // TODO: range check at beginning of string
+  char *(*readString)(struct buffer_ *this);
   void (*freeBuffer)(struct buffer_ *this);
 
   int size;

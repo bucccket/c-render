@@ -89,7 +89,6 @@ off_t getFileSize(FILE *f)
   return size;
 }
 
-// TODO: unify bytestream type with all buffer fields
 bytestream readFile(FILE *f)
 {
   off_t size = getFileSize(f);
