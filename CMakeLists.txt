@@ -20,6 +20,7 @@ target_link_libraries(c-render render utils)
 target_link_libraries(c-render graphics utils)
 target_link_libraries(c-render utils)
 target_link_libraries(c-render fs)
+target_link_libraries(c-render ui)
 
 target_compile_options(c-render PRIVATE -fsanitize=address)
 target_link_options(c-render PRIVATE -fsanitize=address)

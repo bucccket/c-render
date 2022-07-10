@@ -8,7 +8,7 @@
 #include "keyboard.h"
 #include "../filesystem/content_loader.h"
 #include "../render_pipeline/char_render.h"
+#include "../render_pipeline/user_interface/window.h"
+#include "../render_pipeline/user_interface/composite.h"
 
 void spriteEdit();
-void drawBorder(int width, int height);
-void drawBox(int x, int y,char **ptr);

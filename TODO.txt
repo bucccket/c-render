@@ -1,6 +1,8 @@
 ---GENERAL---
 see if you can write an override func without corrupting a function pointer maybeeee
 
+---char_render.c---
+move general UI utils out of char_render
 
 ---buffered_reader.c---
 // TODO: unify bytestream type with all buffer fields

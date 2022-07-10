@@ -6,6 +6,8 @@ set(RENDER_SRC
    char_render.c
 )
 
+
+
 find_package(Curses REQUIRED)
 include_directories(${CURSES_INCLUDE_DIR})
 
