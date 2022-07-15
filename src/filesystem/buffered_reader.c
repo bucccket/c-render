@@ -1,16 +1,34 @@
 #include "buffered_reader.h"
 
+/**
+ * @brief read 8 bit as byte (unsigned char)
+ *
+ * @param this
+ * @return byte
+ */
 static byte readUint8(buffer *this)
 {
   return (byte)this->data[this->offset++];
 }
 
-static word readUint16(buffer *this) // do your homework on these
+/**
+ * @brief read 8 bit as word (unsigned short)
+ *
+ * @param this
+ * @return word
+ */
+static word readUint16(buffer *this)
 {
   return (unsigned short)((byte)this->data[this->offset++] << 000 |
                           (byte)this->data[this->offset++] << 010);
 }
 
+/**
+ * @brief read 8 bit as dword (unsigned int)
+ *
+ * @param this
+ * @return dword
+ */
 static dword readUint32(buffer *this)
 {
   return (unsigned int)((byte)this->data[this->offset++] << 000 |
@@ -19,6 +37,12 @@ static dword readUint32(buffer *this)
                         (byte)this->data[this->offset++] << 030);
 }
 
+/**
+ * @brief read NULL (\0) delimited string
+ *
+ * @param this
+ * @return char*
+ */
 static char *readString(buffer *this) // \0 delimted strings
 {
   int size = 0;
@@ -36,6 +60,11 @@ static char *readString(buffer *this) // \0 delimted strings
   return str;
 }
 
+/**
+ * @brief free buffer struct and its data
+ *
+ * @param this
+ */
 static void freeBuffer(buffer *this)
 {
   if (this->data)
@@ -45,6 +74,12 @@ static void freeBuffer(buffer *this)
   free(this);
 }
 
+/**
+ * @brief create new buffered reader
+ *
+ * @param data
+ * @return buffer*
+ */
 static buffer *new (FILE *data)
 {
   buffer *buffer_struct = (buffer *)malloc(sizeof(buffer));
@@ -55,6 +90,12 @@ static buffer *new (FILE *data)
 
 const struct BufferClass buffer_ = {.new = &new};
 
+/**
+ * @brief Get the filesize object
+ *
+ * @param f
+ * @return off_t
+ */
 off_t getFileSize(FILE *f)
 {
   off_t size;
@@ -66,7 +107,7 @@ off_t getFileSize(FILE *f)
   if (*header == 0xDEADBEEF)
   {
     int *szInflate = calloc(1, sizeof(int));
-    fread(szInflate, sizeof(unsigned int), 1, f); // uncompressed sz
+    fread(szInflate, sizeof(unsigned int), 1, f);
     size = *szInflate;
     free(szInflate);
   }
@@ -89,6 +130,12 @@ off_t getFileSize(FILE *f)
   return size;
 }
 
+/**
+ * @brief read file f as array of bytes (unsigned char*). Function automatically detects compression method
+ *
+ * @param f
+ * @return bytestream
+ */
 bytestream readFile(FILE *f)
 {
   off_t size = getFileSize(f);
@@ -98,7 +145,7 @@ bytestream readFile(FILE *f)
   uLongf *szInflate = calloc(1, sizeof(int));
   uLongf *szDeflate = calloc(1, sizeof(int));
   bytestream data = (bytestream)calloc(size, sizeof(char));
-  if (!data) // I assume we got space for 4 bytes. if not I will not worry HERE
+  if (!data)
   {
     fprintf(stderr, "[ERROR] could not allocate memory for file\n");
     free(data);
@@ -113,12 +160,12 @@ bytestream readFile(FILE *f)
   switch (*header)
   {
   case 0xBEEFB055:
-    // SPRITE -no compression
+    // SPRITE - no compression
     printf("[INFO] uncompressed sprite found\n");
     fread(data, size, 1, f);
     break;
   case 0xDEADBEEF:
-    // SPRITE -no compression
+    // SPRITE - compressed with zlib
     printf("[INFO] compressed sprite found\n");
     fread(szInflate, sizeof(unsigned int), 1, f); // uncompressed sz
     fread(szDeflate, sizeof(unsigned int), 1, f); // compressed sz

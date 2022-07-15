@@ -1,8 +1,13 @@
 ---GENERAL---
 see if you can write an override func without corrupting a function pointer maybeeee
+Implement moads for all allocated memory
+
+---content_loader.c---
+parseGraphic and parseData have different order of arguments
 
 ---char_render.c---
 move general UI utils out of char_render
+make key handling a callback
 
 ---buffered_reader.c---
 // TODO: unify bytestream type with all buffer fields

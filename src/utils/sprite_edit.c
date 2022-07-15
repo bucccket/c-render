@@ -23,7 +23,7 @@ void spriteEdit()
 
     while (true)
     {
-        usleep(1000000 / FPS); // pass over CPU time while frame is paused
+        usleep(1000000 / FPS); // pass CPU time to system for n delay
 
         if (keyHandle(&key) != RENDER_CONTINUE)
         {

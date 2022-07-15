@@ -17,6 +17,7 @@
 #define RENDER_OK 0
 #define RENDER_CONTINUE 1
 #define RENDER_ERROR_FS 2
+#define RENDER_ABORT 3
 
 #define SCREEN_OK 0
 #define SCREEN_TOO_SMALL 1

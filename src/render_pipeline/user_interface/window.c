@@ -3,7 +3,7 @@
 static void addComposite(window *this, composite *cmp)
 {
     this->composites = realloc(this->composites, sizeof(composite *) * (this->compositesCount + 1));
-    this->composites[this->compositesCount++] = cmp; // size / offset difference
+    this->composites[this->compositesCount++] = cmp; // add composite to array
 }
 
 static void destroy(struct window_ *this)

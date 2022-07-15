@@ -1,5 +1,11 @@
 #include "content_loader.h"
 
+/**
+ * @brief loads sprite data from new struct
+ *
+ * @param spriteInst
+ * @return int
+ */
 int loadSprite(sprite *spriteInst)
 {
 
@@ -45,7 +51,7 @@ int loadSprite(sprite *spriteInst)
     for (int n = 0; n < spriteInst->frameCount; n++)
     {
       graphic *g = graphic_.new();
-      spriteInst->graphics[n] = g; // shove the pointer in right away. Doesn't matter what happens we need to clean it
+      spriteInst->graphics[n] = g;
       int parseErr = parseGraphic(g, spriteFile);
       if (parseErr != FS_OK)
       {
@@ -60,6 +66,13 @@ int loadSprite(sprite *spriteInst)
   return FS_OK;
 }
 
+/**
+ * @brief
+ *
+ * @param g graphic pointer
+ * @param spriteFile buffer pointer
+ * @return int
+ */
 int parseGraphic(graphic *g, buffer *spriteFile)
 {
   g->sectionSize = spriteFile->readUint32(spriteFile);
@@ -81,9 +94,16 @@ int parseGraphic(graphic *g, buffer *spriteFile)
   return 0;
 }
 
+/**
+ * @brief parses graphic data according to the graphic header info
+ *
+ * @param spriteFile buffer pointer
+ * @param g graphic pointer
+ * @return int
+ */
 int parseData(buffer *spriteFile, graphic *g)
 {
-  int bounds = (g->width * g->height) + g->height; // bounds with line endings for each line!
+  int bounds = (g->width + 1 * g->height); // bounds with line endings for each line!
   char *data = spriteFile->readString(spriteFile);
 
   if (g->width * g->height != strlen(data))
@@ -111,14 +131,20 @@ int parseData(buffer *spriteFile, graphic *g)
     memcpy(g->data[i], data + i * g->width, g->width);
   }
 
-  // printf("data ptr %p gdata %p gdata[0] %p\n", data, g->data, g->data[0]);
   free(data);
   return FS_OK;
 }
 
+/**
+ * @brief parses mask data according to the graphic header info
+ *
+ * @param spriteFile buffer pointer
+ * @param g graphic pointer
+ * @return int
+ */
 int parseMask(buffer *spriteFile, graphic *g)
 {
-  int bounds = (g->width * g->height) + g->height; // bounds with line endings for each line!
+  int bounds = (g->width + 1 * g->height); // bounds with line endings for each line!
   char *mask = spriteFile->readString(spriteFile);
 
   if (g->width * g->height < strlen(mask))
@@ -136,7 +162,7 @@ int parseMask(buffer *spriteFile, graphic *g)
 
   if (g->mask)
   {
-    for (int i = 0; i <= g->height; i++) // memory needs 1 elemsiz extra ?
+    for (int i = 0; i <= g->height; i++)
     {
       g->mask[i] = (char *)calloc(g->width + 1, sizeof(char));
     }
@@ -146,7 +172,6 @@ int parseMask(buffer *spriteFile, graphic *g)
     memcpy(g->mask[i], mask + i * g->width, g->width);
   }
 
-  // printf("mask ptr %p gmask %p gmask[0] %p\n", mask, g->mask, g->mask[0]);
   free(mask);
   return FS_OK;
 }

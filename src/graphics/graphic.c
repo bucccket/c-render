@@ -1,10 +1,15 @@
 #include "graphic.h"
 
+/**
+ * @brief free graphic struct and members
+ * 
+ * @param this 
+ */
 static void freeBuffer(graphic *this)
 {
   if (this->data && this->mask)
   {
-    for (int i = 0; i <= this->height; i++) // memory needs 1 elemsiz extra ?
+    for (int i = 0; i <= this->height; i++)
     {
       free(this->data[i]);
       free(this->mask[i]);
