@@ -156,7 +156,6 @@ bytestream readFile(FILE *f)
   }
 
   fread(header, sizeof(unsigned int), 1, f);
-  printf("header %06X\n", *header);
   switch (*header)
   {
   case 0xBEEFB055:
@@ -169,7 +168,7 @@ bytestream readFile(FILE *f)
     printf("[INFO] compressed sprite found\n");
     fread(szInflate, sizeof(unsigned int), 1, f); // uncompressed sz
     fread(szDeflate, sizeof(unsigned int), 1, f); // compressed sz
-    char *deflatedStream = (bytestream)calloc(*szDeflate, sizeof(char));
+    char *deflatedStream = (char*)calloc(*szDeflate, sizeof(char));
     fread(deflatedStream, size, 1, f);
     data = (char *)realloc(data, *szInflate); // realloc data buffer to fit the infalted data
     switch (uncompress(data, szInflate, deflatedStream, *szDeflate))
