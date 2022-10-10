@@ -10,21 +10,27 @@ set(CMAKE_EXE_LINKER_FLAGS -pg)
 set(CMAKE_BUILD_TYPE=Debug)
 
 add_subdirectory(src)
-add_subdirectory(include/zlib-1.2.12)
-
-include_directories(ZLIB src/zlib-1.2.11)
 
 add_executable(c-render src/app_main.c)
 
-target_link_libraries(c-render render utils)
-target_link_libraries(c-render graphics utils)
+#ZLIB
+find_package(ZLIB)
+target_link_libraries(c-render z)
+
+#CURSES
+find_package(Curses)
+target_link_libraries(c-render curses)
+
+#SOURCE 
 target_link_libraries(c-render utils)
+target_link_libraries(c-render render)
+target_link_libraries(c-render graphics)
 target_link_libraries(c-render fs)
 target_link_libraries(c-render ui)
 
 target_compile_options(c-render PRIVATE -fsanitize=address)
 target_link_options(c-render PRIVATE -fsanitize=address)
-add_compile_options(-fsanitize=address)
+add_compile_options(-fsanitize=address -Wextra)
 add_link_options(-fsanitize=address)
 
 install(TARGETS c-render RUNTIME DESTINATION ${BIN_DIR})

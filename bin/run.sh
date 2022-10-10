@@ -1,0 +1,1 @@
+stty sane && clear && cmake --build ../build && ./c-render
