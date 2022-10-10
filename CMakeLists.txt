@@ -15,22 +15,22 @@ add_executable(c-render src/app_main.c)
 
 #ZLIB
 find_package(ZLIB)
-target_link_libraries(c-render ZLIB::ZLIB)
+target_link_libraries(c-render z)
 
 #CURSES
 find_package(Curses)
 target_link_libraries(c-render curses)
 
 #SOURCE 
-target_link_libraries(c-render render utils)
-target_link_libraries(c-render graphics utils)
 target_link_libraries(c-render utils)
+target_link_libraries(c-render render)
+target_link_libraries(c-render graphics)
 target_link_libraries(c-render fs)
 target_link_libraries(c-render ui)
 
 target_compile_options(c-render PRIVATE -fsanitize=address)
 target_link_options(c-render PRIVATE -fsanitize=address)
-add_compile_options(-fsanitize=address)
+add_compile_options(-fsanitize=address -Wextra)
 add_link_options(-fsanitize=address)
 
 install(TARGETS c-render RUNTIME DESTINATION ${BIN_DIR})
