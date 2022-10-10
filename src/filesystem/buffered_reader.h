@@ -6,7 +6,9 @@
 #include <zlib.h>
 
 #define FS_OK 0
-#define FS_ERR_READ 1
+#define FS_FILE_ERROR 1
+#define FS_HEADER_ERROR 2
+#define FS_PARSE_ERROR 3
 
 typedef unsigned char *bytestream; // byte stream
 typedef unsigned char byte;        // 8 bit
