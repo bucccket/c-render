@@ -4,12 +4,12 @@
 #include <stdlib.h>
 
 #include "window.h"
+#include "ui_utils.h"
 
 #define COMPOSITE_FLAG_EXTEND_V 0x1
 #define COMPOSITE_FLAG_EXTEND_H 0x2
 #define COMPOSITE_FLAG_CENTER 0x4
 
-// NOTE: because of the way the codependency of window and composite I need to reference the struct instead of the typedef
 typedef struct composite_
 {
     struct window_ *window;

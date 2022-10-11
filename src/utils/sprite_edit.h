@@ -9,5 +9,6 @@
 #include "../render_pipeline/char_render.h"
 #include "../render_pipeline/user_interface/window.h"
 #include "../render_pipeline/user_interface/composite.h"
+#include "../render_pipeline/user_interface/menubar.h"
 
 void spriteEdit();

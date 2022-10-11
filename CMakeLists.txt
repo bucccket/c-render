@@ -14,11 +14,11 @@ add_subdirectory(src)
 add_executable(c-render src/app_main.c)
 
 #ZLIB
-find_package(ZLIB)
+find_package(ZLIB REQUIRED)
 target_link_libraries(c-render z)
 
 #CURSES
-find_package(Curses)
+find_package(Curses REQUIRED)
 target_link_libraries(c-render curses)
 
 #SOURCE 

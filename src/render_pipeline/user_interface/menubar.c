@@ -1,11 +1,11 @@
-#include "composite.h"
+#include "menubar.h"
 
-static void destroy(composite *this)
+static void destroy(menubar *this)
 {
     free(this);
 }
 
-static void render(composite *this)
+static void render(menubar *this)
 {
     int x, y = 0;
 
@@ -44,14 +44,13 @@ static void render(composite *this)
             }
         }
     }
-    mvprintw(this->y, this->x + 1, " %s ", this->compositeName);
 }
 
-static composite *new (window *window, char *compositeName, int x, int y, int width, int height, int compositeRule)
+static menubar *new (struct window_ *window, int layoutRule)
 {
-    composite *composite_ptr = (composite *)malloc(sizeof(composite));
-    *composite_ptr = (composite){.window = window, .compositeName = compositeName, .x = x, .y = y, .width = width, .height = height, .compositeRule = compositeRule, .render = &render, .destroy = &destroy};
-    return composite_ptr;
+    menubar *menubar_ptr = (menubar *)malloc(sizeof(menubar));
+    *menubar_ptr = (menubar){.window = window, .x = 1, .y = 1, .width = window->width-2, .height = 3, .layoutRule = layoutRule, .render = &render, .destroy = &destroy};
+    return menubar_ptr;
 }
 
-const struct CompositeClass composite_ = {.new = &new};
+const struct MenuBarClass menubar_ = {.new = &new};

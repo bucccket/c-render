@@ -14,9 +14,11 @@ void spriteEdit()
     adjustScreen(&row, &col, &r_old, &c_old);
 
     window *window = window_.new(col, row, 2, 2, "Sprite Editor");
-    composite *titlebar = composite_.new(window, "titlebar", 1, 1, 20, 15, COMPOSITE_FLAG_CENTER);
-    composite *options = composite_.new(window, "options", 21, 1, 20, 15, COMPOSITE_FLAG_CENTER | COMPOSITE_FLAG_EXTEND_H);
+    menubar *menubar = menubar_.new(window, LAYOUT_FLAG_TOP);
+    composite *titlebar = composite_.new(window, "titlebar", 1, 4, 20, 12, COMPOSITE_FLAG_CENTER);
+    composite *options = composite_.new(window, "options", 21, 4, 20, 12, COMPOSITE_FLAG_CENTER | COMPOSITE_FLAG_EXTEND_H);
     composite *info = composite_.new(window, "info", 1, 16, 20, 15, COMPOSITE_FLAG_CENTER | COMPOSITE_FLAG_EXTEND_V);
+    window->addMenuBar(window, menubar);
     window->addComposite(window, titlebar);
     window->addComposite(window, options);
     window->addComposite(window, info);

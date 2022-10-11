@@ -24,9 +24,8 @@ int testScreenCentering(void)
   int frame = 0;
 
   int x = 0, y = 0;
-  int x_o = x, y_o = y;
   int w = test->graphics[0]->width, h = test->graphics[0]->height;
-  int hspeed = 1, vspeed = 1;
+  int hspeed = 1, vspeed = 0;
 
   setlocale(LC_CTYPE, "C-UTF-8"); /* inititalizing locale */
   initscr();                      /* start the curses mode */
