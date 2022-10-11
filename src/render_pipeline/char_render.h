@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "../utils/keyboard.h"
-#include "../filesystem/content_loader.h"
+#include "../graphics/sprite.h"
 
 #define FPS 60
 

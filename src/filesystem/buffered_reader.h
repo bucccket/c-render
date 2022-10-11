@@ -10,26 +10,21 @@
 #define FS_HEADER_ERROR 2
 #define FS_PARSE_ERROR 3
 
-typedef unsigned char *bytestream; // byte stream
-typedef unsigned char byte;        // 8 bit
-typedef unsigned short word;       // 16 bit
-typedef unsigned int dword;        // 32 bit
-
 /**
  * @brief buffer struct contains size, position and filestream
  *
  */
 typedef struct buffer_
 {
-  byte (*readUint8)(struct buffer_ *this);   /** @brief read 8 bytes @param this @return byte */
-  word (*readUint16)(struct buffer_ *this);  /** @brief read 16 bytes @param this @return word */
-  dword (*readUint32)(struct buffer_ *this); /** @brief read 32 bytes @param this  @return dword */
-  char *(*readString)(struct buffer_ *this); /** @brief read NULL delimited string @param this @return char* */
-  void (*freeBuffer)(struct buffer_ *this);  /** @brief free buffer (self) and members @param this */
+  unsigned char (*readUint8)(struct buffer_ *this);   /** @brief read 8 bytes @param this @return byte */
+  unsigned short (*readUint16)(struct buffer_ *this); /** @brief read 16 bytes @param this @return word */
+  unsigned int (*readUint32)(struct buffer_ *this);   /** @brief read 32 bytes @param this  @return dword */
+  char *(*readString)(struct buffer_ *this);          /** @brief read NULL delimited string @param this @return char* */
+  void (*freeBuffer)(struct buffer_ *this);           /** @brief free buffer (self) and members @param this */
 
-  int size;        /** @brief size of buffer */
-  int offset;      /** @brief offset of buffer */
-  bytestream data; /** @brief data of buffer */
+  int size;            /** @brief size of buffer */
+  int offset;          /** @brief offset of buffer */
+  unsigned char *data; /** @brief data of buffer */
 } buffer;
 
 extern const struct BufferClass
@@ -37,5 +32,5 @@ extern const struct BufferClass
   buffer *(*new)(FILE *data);
 } buffer_;
 
-bytestream readFile(FILE *f);
+unsigned char *readFile(FILE *f);
 off_t getFileSize(FILE *f);

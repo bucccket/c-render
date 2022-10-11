@@ -5,9 +5,7 @@
 #include <string.h>
 #include <ncurses.h>
 
-#include "../filesystem/buffered_reader.h"
-
 char *prepend(const char *prepended, const char *source);
-void hexdump(bytestream data, size_t size);
+void hexdump(unsigned char *data, size_t size);
 void print2dString(char **data, int lines);
 void printACS(void);

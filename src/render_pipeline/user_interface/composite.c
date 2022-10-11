@@ -14,35 +14,30 @@ static void render(struct composite_ *this)
         return;
     }
 
-    int vLine = ACS_VLINE;
-    int hLine = ACS_HLINE;
-    int ulCorner = ACS_ULCORNER;
-    int urCorner = ACS_URCORNER;
-    int llCorner = ACS_LLCORNER;
-    int lrCorner = ACS_LRCORNER;
-
     for (x = 0; x < this->width; x++)
     {
         for (y = 0; y < this->height; y++)
         {
             if (y <= 0 || y >= (this->height - 1))
             {
-                mvaddch(y + this->y, x + this->x, hLine);
+                mvaddch(y + this->y, x + this->x, ACS_HLINE);
             }
+
             if (x <= 0 || x >= (this->width - 1))
             {
-                mvaddch(y + this->y, x + this->x, vLine);
+                mvaddch(y + this->y, x + this->x, ACS_VLINE);
                 if (y == 0)
                 {
-                    mvaddch(y + this->y, x + this->x, x == 0 ? ulCorner : urCorner);
+                    mvaddch(y + this->y, x + this->x, x == 0 ? ACS_ULCORNER : ACS_URCORNER);
                 }
                 else if (y >= (this->height - 1))
                 {
-                    mvaddch(y + this->y, x + this->x, x == 0 ? llCorner : lrCorner);
+                    mvaddch(y + this->y, x + this->x, x == 0 ? ACS_LLCORNER : ACS_LRCORNER);
                 }
             }
         }
     }
+    mvprintw(this->y, this->x+1, " %s ", this->compositeName);
 }
 
 static composite *new (window *window, char *compositeName, int x, int y, int width, int height, int compositeRule)

@@ -1,40 +1,40 @@
 #include "buffered_reader.h"
 
 /**
- * @brief read 8 bit as byte (unsigned char)
+ * @brief read 8 bit as unsigned char (unsigned char)
  *
  * @param this
- * @return byte
+ * @return unsigned char
  */
-static byte readUint8(buffer *this)
+static unsigned char readUint8(buffer *this)
 {
-  return (byte)this->data[this->offset++];
+  return (unsigned char)this->data[this->offset++];
 }
 
 /**
- * @brief read 8 bit as word (unsigned short)
+ * @brief read 8 bit as unsigned short
  *
  * @param this
- * @return word
+ * @return unsigned short
  */
-static word readUint16(buffer *this)
+static unsigned short readUint16(buffer *this)
 {
-  return (unsigned short)((byte)this->data[this->offset++] << 000 |
-                          (byte)this->data[this->offset++] << 010);
+  return (unsigned short)((unsigned char)this->data[this->offset++] << 000 |
+                          (unsigned char)this->data[this->offset++] << 010);
 }
 
 /**
- * @brief read 8 bit as dword (unsigned int)
+ * @brief read 8 bit as unsigned int (unsigned int)
  *
  * @param this
- * @return dword
+ * @return unsigned int
  */
-static dword readUint32(buffer *this)
+static unsigned int readUint32(buffer *this)
 {
-  return (unsigned int)((byte)this->data[this->offset++] << 000 |
-                        (byte)this->data[this->offset++] << 010 |
-                        (byte)this->data[this->offset++] << 020 |
-                        (byte)this->data[this->offset++] << 030);
+  return (unsigned int)((unsigned char)this->data[this->offset++] << 000 |
+                        (unsigned char)this->data[this->offset++] << 010 |
+                        (unsigned char)this->data[this->offset++] << 020 |
+                        (unsigned char)this->data[this->offset++] << 030);
 }
 
 /**
@@ -134,9 +134,9 @@ off_t getFileSize(FILE *f)
  * @brief read file f as array of bytes (unsigned char*). Function automatically detects compression method
  *
  * @param f
- * @return bytestream
+ * @return unsigned char *
  */
-bytestream readFile(FILE *f)
+unsigned char * readFile(FILE *f)
 {
   off_t size = getFileSize(f);
 
@@ -144,7 +144,7 @@ bytestream readFile(FILE *f)
   int *header = calloc(1, sizeof(int));
   uLongf *szInflate = calloc(1, sizeof(int));
   uLongf *szDeflate = calloc(1, sizeof(int));
-  bytestream data = (bytestream)calloc(size, sizeof(char));
+  unsigned char * data = (unsigned char *)calloc(size, sizeof(char));
   if (!data)
   {
     fprintf(stderr, "[ERROR] could not allocate memory for file\n");

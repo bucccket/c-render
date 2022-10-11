@@ -6,7 +6,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include "keyboard.h"
-#include "../filesystem/content_loader.h"
 #include "../render_pipeline/char_render.h"
 #include "../render_pipeline/user_interface/window.h"
 #include "../render_pipeline/user_interface/composite.h"

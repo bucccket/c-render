@@ -14,7 +14,7 @@ int testScreenCentering(void)
   sprite *test = sprite_.new("test/animtest_2_mask.spr");
   sprite *test2 = sprite_.new("debug/center.spr");
 
-  if (loadSprite(test) || loadSprite(test2))
+  if (test == NULL || test2 == NULL)
   {
     test->freeBuffer(test);
     endwin();
