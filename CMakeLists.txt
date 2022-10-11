@@ -22,10 +22,10 @@ find_package(Curses)
 target_link_libraries(c-render curses)
 
 #SOURCE 
-target_link_libraries(c-render utils)
-target_link_libraries(c-render render)
+target_link_libraries(c-render utils curses)
+target_link_libraries(c-render render curses)
 target_link_libraries(c-render graphics)
-target_link_libraries(c-render fs)
+target_link_libraries(c-render fs z)
 target_link_libraries(c-render ui)
 
 target_compile_options(c-render PRIVATE -fsanitize=address)
