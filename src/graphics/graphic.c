@@ -2,8 +2,8 @@
 
 /**
  * @brief free graphic struct and members
- * 
- * @param this 
+ *
+ * @param this
  */
 static void freeBuffer(graphic *this)
 {

@@ -1,7 +1,7 @@
 file = open("dump.txt", "r")
 text = file.read()
 
-#frames ? 286
+# frames ? 286
 
 width = 40
 height = 24

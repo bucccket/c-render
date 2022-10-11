@@ -136,7 +136,7 @@ off_t getFileSize(FILE *f)
  * @param f
  * @return unsigned char *
  */
-unsigned char * readFile(FILE *f)
+unsigned char *readFile(FILE *f)
 {
   off_t size = getFileSize(f);
 
@@ -144,7 +144,7 @@ unsigned char * readFile(FILE *f)
   int *header = calloc(1, sizeof(int));
   uLongf *szInflate = calloc(1, sizeof(int));
   uLongf *szDeflate = calloc(1, sizeof(int));
-  unsigned char * data = (unsigned char *)calloc(size, sizeof(char));
+  unsigned char *data = (unsigned char *)calloc(size, sizeof(char));
   if (!data)
   {
     fprintf(stderr, "[ERROR] could not allocate memory for file\n");
@@ -168,7 +168,7 @@ unsigned char * readFile(FILE *f)
     printf("[INFO] compressed sprite found\n");
     fread(szInflate, sizeof(unsigned int), 1, f); // uncompressed sz
     fread(szDeflate, sizeof(unsigned int), 1, f); // compressed sz
-    char *deflatedStream = (char*)calloc(*szDeflate, sizeof(char));
+    char *deflatedStream = (char *)calloc(*szDeflate, sizeof(char));
     fread(deflatedStream, size, 1, f);
     data = (char *)realloc(data, *szInflate); // realloc data buffer to fit the infalted data
     switch (uncompress(data, szInflate, deflatedStream, *szDeflate))

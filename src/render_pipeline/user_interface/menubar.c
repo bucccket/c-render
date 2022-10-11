@@ -49,7 +49,7 @@ static void render(menubar *this)
 static menubar *new (struct window_ *window, int layoutRule)
 {
     menubar *menubar_ptr = (menubar *)malloc(sizeof(menubar));
-    *menubar_ptr = (menubar){.window = window, .x = 1, .y = 1, .width = window->width-2, .height = 3, .layoutRule = layoutRule, .render = &render, .destroy = &destroy};
+    *menubar_ptr = (menubar){.window = window, .x = 1, .y = 1, .width = window->width - 2, .height = 3, .layoutRule = layoutRule, .render = &render, .destroy = &destroy};
     return menubar_ptr;
 }
 

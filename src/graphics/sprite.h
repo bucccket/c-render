@@ -19,7 +19,7 @@ typedef struct sprite_
 {
   void (*freeBuffer)(struct sprite_ *this);
 
-  int loaded; //boolean
+  int loaded; // boolean
   short formatVersion;
   char *spriteName;
   short frameCount;
@@ -33,6 +33,6 @@ extern const struct SpriteClass
 } sprite_;
 
 int loadSprite(sprite *spriteInst);
-int parseGraphic(graphic *g, buffer* spriteFile);
+int parseGraphic(graphic *g, buffer *spriteFile);
 int parseData(buffer *spriteFile, graphic *g);
 int parseMask(buffer *spriteFile, graphic *g);
