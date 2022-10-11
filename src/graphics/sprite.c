@@ -123,8 +123,8 @@ int parseGraphic(graphic *g, buffer *spriteFile)
     return FS_PARSE_ERROR;
   }
 
-  parseData(spriteFile, g);
-  parseMask(spriteFile, g);
+  parseData(g, spriteFile);
+  parseMask(g, spriteFile);
 
   return 0;
 }
@@ -136,7 +136,7 @@ int parseGraphic(graphic *g, buffer *spriteFile)
  * @param g graphic pointer
  * @return int
  */
-int parseData(buffer *spriteFile, graphic *g)
+int parseData(graphic *g, buffer *spriteFile)
 {
   int bounds = (g->width + 1 * g->height); // bounds with line endings for each line!
   char *data = spriteFile->readString(spriteFile);
@@ -177,7 +177,7 @@ int parseData(buffer *spriteFile, graphic *g)
  * @param g graphic pointer
  * @return int
  */
-int parseMask(buffer *spriteFile, graphic *g)
+int parseMask(graphic *g, buffer *spriteFile)
 {
   int bounds = (g->width + 1 * g->height); // bounds with line endings for each line!
   char *mask = spriteFile->readString(spriteFile);

@@ -34,5 +34,5 @@ extern const struct SpriteClass
 
 int loadSprite(sprite *spriteInst);
 int parseGraphic(graphic *g, buffer *spriteFile);
-int parseData(buffer *spriteFile, graphic *g);
-int parseMask(buffer *spriteFile, graphic *g);
+int parseData(graphic *g, buffer *spriteFile);
+int parseMask(graphic *g, buffer *spriteFile);

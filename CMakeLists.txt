@@ -18,8 +18,15 @@ find_package(ZLIB REQUIRED)
 target_link_libraries(c-render z)
 
 #CURSES
+set(CURSES_NEED_NCURSES TRUE)
+set(CURSES_NEED_WIDE TRUE)
 find_package(Curses REQUIRED)
+include_directories(${CURSES_INCLUDE_DIRS})
 target_link_libraries(c-render curses)
+
+#THREADS
+find_package(Threads REQUIRED)
+target_link_libraries(c-render ${CMAKE_THREAD_LIBS_INIT})
 
 #SOURCE 
 target_link_libraries(c-render utils curses)

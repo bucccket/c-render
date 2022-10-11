@@ -1,14 +1,15 @@
 ---GENERAL---
-see if you can write an override func without corrupting a function pointer maybeeee
-Implement moads for all allocated memory
+Implement monads for all allocated memory??!? what does this mean?
+Add scroll to composites
+Handle rendering in a more streamlined way
+Add a way to set the background color of a composite -> copilot
 
----content_loader.c---
-parseGraphic and parseData have different order of arguments
+--IMPL--
+add POSIX threads to program to ensure stable running and concurrent loading operations
+
+--BUGS--
+the ACS characters do NOT always render properly
 
 ---char_render.c---
 move general UI utils out of char_render
 make key handling a callback
-
----buffered_reader.c---
-// TODO: unify bytestream type with all buffer fields
-
