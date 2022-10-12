@@ -2,9 +2,11 @@
 
 #include <stdarg.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "window.h"
 #include "ui_utils.h"
+#include "../../utils/vector.h"
 
 #define LAYOUT_FLAG_TOP 0x1
 #define LAYOUT_FLAG_BOTTOM 0x2
@@ -15,6 +17,7 @@ typedef struct menubar_
     int x, y;
     int width, height;
     int layoutRule; // flags for composite rule
+    vector menuItems;
     void (*render)(struct menubar_ *this);
     void (*destroy)(struct menubar_ *this);
 } menubar;

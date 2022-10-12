@@ -10,6 +10,9 @@ add POSIX threads to program to ensure stable running and concurrent loading ope
 --BUGS--
 the ACS characters do NOT always render properly
 
+---composite.c---
+malloc the compositeName
+
 ---char_render.c---
 move general UI utils out of char_render
 make key handling a callback
