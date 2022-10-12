@@ -2,9 +2,8 @@
 *.swp
 *.bak
 *.out
-c-console-render
 .vscode/
+.git/
 build/
-include/zlib-1.2.12/
 lib/
 bin/c-render
