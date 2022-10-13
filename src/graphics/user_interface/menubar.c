@@ -19,12 +19,12 @@ static void render(menubar *this)
         return;
     }
 
-    int vLine = ACS_VLINE;
-    int hLine = ACS_HLINE;
-    int ulCorner = ACS_ULCORNER;
-    int urCorner = ACS_URCORNER;
-    int llCorner = ACS_LLCORNER;
-    int lrCorner = ACS_LRCORNER;
+    int vLine = W_VLINE;
+    int hLine = W_HLINE;
+    int ulCorner = W_ULCORNER;
+    int urCorner = W_URCORNER;
+    int llCorner = W_LLCORNER;
+    int lrCorner = W_LRCORNER;
 
     for (x = 0; x < this->width; x++)
     {
@@ -73,11 +73,7 @@ static menubar *new (struct window_ *window, int layoutRule)
     v->pfVectorAdd(v, "Menu");
     v->pfVectorAdd(v, "Edit");
     v->pfVectorAdd(v, "View");
-    v->pfVectorAdd(v, "View");
-    v->pfVectorAdd(v, "View");
-    v->pfVectorAdd(v, "View");
-    v->pfVectorAdd(v, "View");
-    v->pfVectorAdd(v, "View");
+
     *menubar_ptr = (menubar){.window = window, .x = 1, .y = 1, .width = window->width - 2, .height = 3, .layoutRule = layoutRule, .menuItems = v, .render = &render, .destroy = &destroy};
     return menubar_ptr;
 }

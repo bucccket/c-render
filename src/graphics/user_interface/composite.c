@@ -17,12 +17,12 @@ static void render(composite *this)
         return;
     }
 
-    int vLine = ACS_VLINE;
-    int hLine = ACS_HLINE;
-    int ulCorner = ACS_ULCORNER;
-    int urCorner = ACS_URCORNER;
-    int llCorner = ACS_LLCORNER;
-    int lrCorner = ACS_LRCORNER;
+    int vLine = W_VLINE;
+    int hLine = W_HLINE;
+    int ulCorner = W_ULCORNER;
+    int urCorner = W_URCORNER;
+    int llCorner = W_LLCORNER;
+    int lrCorner = W_LRCORNER;
 
     for (x = 0; x < this->width; x++)
     {

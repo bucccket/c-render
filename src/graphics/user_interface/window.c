@@ -63,18 +63,18 @@ static void render(struct window_ *this)
         {
             if (y <= 0 || y >= (this->height - 1))
             {
-                mvaddch(y, x, ACS_HLINE);
+                mvaddch(y, x, W_HLINE);
             }
             if (x <= 0 || x >= (this->width - 1))
             {
-                mvaddch(y, x, ACS_VLINE);
+                mvaddch(y, x, W_VLINE);
                 if (y == 0)
                 {
-                    mvaddch(y, x, x == 0 ? ACS_ULCORNER : ACS_URCORNER);
+                    mvaddch(y, x, x == 0 ? W_ULCORNER : W_URCORNER);
                 }
                 else if (y >= (this->height - 1))
                 {
-                    mvaddch(y, x, x == 0 ? ACS_LLCORNER : ACS_LRCORNER);
+                    mvaddch(y, x, x == 0 ? W_LLCORNER : W_LRCORNER);
                 }
             }
         }
