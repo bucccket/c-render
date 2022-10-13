@@ -54,8 +54,14 @@ static void render(menubar *this)
     for (int i = 0; i < this->menuItems->pfVectorTotal(this->menuItems); i++)
     {
         char *item = (char *)this->menuItems->pfVectorGet(this->menuItems, i);
-        mvprintw(this->y + 1, this->x + offx, " %s ", this->menuItems->pfVectorGet(this->menuItems, i));
-        offx += strlen(item) + 1;
+        mvaddch(this->y + 1, this->x + offx++, ' ');
+        mvprintw(this->y + 1, this->x + offx, " %s | ", item + 1);
+        attron(A_UNDERLINE);
+        mvaddch(this->y + 1, this->x + offx, item[0]);
+        attroff(A_UNDERLINE);
+        offx += strlen(item) + 2;
+        mvaddch(this->y, this->x + offx - 1, ACS_TTEE);
+        mvaddch(this->y + 2, this->x + offx - 1, ACS_BTEE);
     }
 }
 
@@ -63,9 +69,14 @@ static menubar *new (struct window_ *window, int layoutRule)
 {
     menubar *menubar_ptr = (menubar *)malloc(sizeof(menubar));
 
-    vector* v = sVector.new(); // go I love huge, fat, leaking, consturctor calls
-    v->pfVectorAdd(v, "Menu |");
-    v->pfVectorAdd(v, "Edit |");
+    vector *v = sVector.new();
+    v->pfVectorAdd(v, "Menu");
+    v->pfVectorAdd(v, "Edit");
+    v->pfVectorAdd(v, "View");
+    v->pfVectorAdd(v, "View");
+    v->pfVectorAdd(v, "View");
+    v->pfVectorAdd(v, "View");
+    v->pfVectorAdd(v, "View");
     v->pfVectorAdd(v, "View");
     *menubar_ptr = (menubar){.window = window, .x = 1, .y = 1, .width = window->width - 2, .height = 3, .layoutRule = layoutRule, .menuItems = v, .render = &render, .destroy = &destroy};
     return menubar_ptr;
