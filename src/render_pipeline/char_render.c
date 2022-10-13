@@ -27,9 +27,9 @@ int testScreenCentering(void)
   int w = test->graphics[0]->width, h = test->graphics[0]->height;
   int hspeed = 1, vspeed = 0;
 
-  setlocale(LC_CTYPE, "C-UTF-8"); /* inititalizing locale */
-  initscr();                      /* start the curses mode */
-  initKeyboard();                 /* start keyboard nodelay for stdscr */
+  setlocale(LC_ALL, ""); /* inititalizing locale */
+  initscr();             /* start the curses mode */
+  initKeyboard();        /* start keyboard nodelay for stdscr */
   while (true)
   {
     usleep(1000000 / FPS);                                    // pass CPU time to system for n delay
@@ -45,7 +45,7 @@ int testScreenCentering(void)
     if (!adjustScreen(&row, &col, &r_old, &c_old))
     {
       drawPrimitiveRect(g2->data, g2->height, (col >> 1) - 14, (row >> 1) - 1); // slightly faster math
-      //drawMaskedRect(g->data, g->mask, g->width, g->height, x, y);
+      // drawMaskedRect(g->data, g->mask, g->width, g->height, x, y);
 
       x += hspeed;
       y += vspeed;
@@ -58,7 +58,7 @@ int testScreenCentering(void)
         vspeed = -vspeed;
       }
       refresh();
-      //clearMaskedRect(g->mask, g->width, g->height, x, y);
+      // clearMaskedRect(g->mask, g->width, g->height, x, y);
     }
     frame++;
   }
