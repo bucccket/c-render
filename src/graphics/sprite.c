@@ -24,7 +24,10 @@ static sprite *new (char *name)
   char *allocatedSpriteName = calloc(strlen(name) + 1, sizeof(char));
   memmove(allocatedSpriteName, name, strlen(name));
   sprite *sprite_ptr = (sprite *)malloc(sizeof(sprite));
-  *sprite_ptr = (sprite){.loaded = 0, .spriteName = allocatedSpriteName, .freeBuffer = &freeBuffer};
+  *sprite_ptr = (sprite){
+      .loaded = 0,
+      .spriteName = allocatedSpriteName,
+      .freeBuffer = &freeBuffer};
   if (loadSprite(sprite_ptr))
   {
     fprintf(stderr, "[ERROR] Failed creating %s\n", allocatedSpriteName);

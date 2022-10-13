@@ -2,8 +2,9 @@
 
 static void destroy(composite *this)
 {
-    if(this->compositeName){
-      free(this->compositeName);
+    if (this->compositeName)
+    {
+        free(this->compositeName);
     }
     free(this);
 }
@@ -53,9 +54,18 @@ static void render(composite *this)
 static composite *new (window *window, char *compositeName, int x, int y, int width, int height, int compositeRule)
 {
     composite *composite_ptr = (composite *)malloc(sizeof(composite));
-    char* compositeNameMem = (char*)calloc(strlen(compositeName)+1,sizeof(char));
-    memcpy (compositeNameMem,compositeName, strlen(compositeName));
-    *composite_ptr = (composite){.window = window, .compositeName = compositeNameMem, .x = x, .y = y, .width = width, .height = height, .compositeRule = compositeRule, .render = &render, .destroy = &destroy};
+    char *compositeNameMem = (char *)calloc(strlen(compositeName) + 1, sizeof(char));
+    memcpy(compositeNameMem, compositeName, strlen(compositeName));
+    *composite_ptr = (composite){
+        .window = window,
+        .compositeName = compositeNameMem,
+        .x = x,
+        .y = y,
+        .width = width,
+        .height = height,
+        .compositeRule = compositeRule,
+        .render = &render,
+        .destroy = &destroy};
     return composite_ptr;
 }
 

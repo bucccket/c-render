@@ -6,6 +6,7 @@
 
 #include "menubar.h"
 #include "composite.h"
+#include "ui_utils.h"
 
 typedef struct window_
 {
@@ -14,12 +15,9 @@ typedef struct window_
   int xCell;
   int yCell;
   char *title;
-  int compositesCount;
-  struct composite_ **composites;
-  int menubarsCount;
-  struct menubar_ **menubars;
-  void (*addComposite)(struct window_ *this, struct composite_ *composite);
-  void (*addMenuBar)(struct window_ *this, struct menubar_ *menubar);
+  int elementsCount;
+  struct element_ **elements;
+  void (*add)(struct window_ *this, struct element_ *element);
   void (*render)(struct window_ *this);
   void (*resize)(struct window_ *this, int width, int height);
   void (*destroy)(struct window_ *this);

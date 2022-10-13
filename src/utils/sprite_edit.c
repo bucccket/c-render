@@ -14,14 +14,27 @@ void spriteEdit()
     adjustScreen(&row, &col, &r_old, &c_old);
 
     window *window = window_.new(col, row, 2, 2, "Sprite Editor");
-    menubar *menubar = menubar_.new(window, LAYOUT_FLAG_TOP);
-    composite *titlebar = composite_.new(window, "titlebar", 1, 4, 20, 12, COMPOSITE_FLAG_CENTER);
-    composite *options = composite_.new(window, "options", 21, 4, 20, 12, COMPOSITE_FLAG_CENTER | COMPOSITE_FLAG_EXTEND_H);
-    composite *info = composite_.new(window, "info", 1, 16, 20, 15, COMPOSITE_FLAG_CENTER | COMPOSITE_FLAG_EXTEND_V);
-    window->addMenuBar(window, menubar);
-    window->addComposite(window, titlebar);
-    window->addComposite(window, options);
-    window->addComposite(window, info);
+    element *menubar = &(element){
+        .type = MENUBAR,
+        .menubar = menubar_.new(window, LAYOUT_FLAG_TOP)};
+    element *titlebar = &(element){
+        .type = COMPOSITE,
+        .composite = composite_.new(window, "titlebar", 1, 4, 20, 12, COMPOSITE_FLAG_CENTER)};
+    element *options = &(element){
+        .type = COMPOSITE,
+        .composite = composite_.new(window, "options", 21, 4, 20, 12, COMPOSITE_FLAG_CENTER | COMPOSITE_FLAG_EXTEND_H)};
+    element *info = &(element){
+        .type = COMPOSITE,
+        .composite = composite_.new(window, "info", 1, 16, 20, 15, COMPOSITE_FLAG_CENTER | COMPOSITE_FLAG_EXTEND_V)};
+    element *status = &(element){
+        .type = STATUSLABEL,
+        .statuslabel = statuslabel_.new(window, "STATUS: User Interface in progress still. Also the status label render is not fully implemented yet")}; 
+
+    window->add(window, menubar);
+    window->add(window, titlebar);
+    window->add(window, options);
+    window->add(window, info);
+    window->add(window, status);
 
     while (true)
     {

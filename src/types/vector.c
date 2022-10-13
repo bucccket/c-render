@@ -1,11 +1,11 @@
 #include "vector.h"
 
-//SOURCE: https://aticleworld.com/implement-vector-in-c/
+// SOURCE: https://aticleworld.com/implement-vector-in-c/
 
 int vectorTotal(vector *v)
 {
     int totalCount = UNDEFINE;
-    if(v)
+    if (v)
     {
         totalCount = v->vectorList.total;
     }
@@ -14,8 +14,8 @@ int vectorTotal(vector *v)
 
 int vectorResize(vector *v, int capacity)
 {
-    int  status = UNDEFINE;
-    if(v)
+    int status = UNDEFINE;
+    if (v)
     {
         void **items = realloc(v->vectorList.items, sizeof(void *) * capacity);
         if (items)
@@ -30,13 +30,13 @@ int vectorResize(vector *v, int capacity)
 
 int vectorPushBack(vector *v, void *item)
 {
-    int  status = UNDEFINE;
-    if(v)
+    int status = UNDEFINE;
+    if (v)
     {
         if (v->vectorList.capacity == v->vectorList.total)
         {
             status = vectorResize(v, v->vectorList.capacity * 2);
-            if(status != UNDEFINE)
+            if (status != UNDEFINE)
             {
                 v->vectorList.items[v->vectorList.total++] = item;
             }
@@ -52,8 +52,8 @@ int vectorPushBack(vector *v, void *item)
 
 int vectorSet(vector *v, int index, void *item)
 {
-    int  status = UNDEFINE;
-    if(v)
+    int status = UNDEFINE;
+    if (v)
     {
         if ((index >= 0) && (index < v->vectorList.total))
         {
@@ -67,7 +67,7 @@ int vectorSet(vector *v, int index, void *item)
 void *vectorGet(vector *v, int index)
 {
     void *readData = NULL;
-    if(v)
+    if (v)
     {
         if ((index >= 0) && (index < v->vectorList.total))
         {
@@ -79,9 +79,9 @@ void *vectorGet(vector *v, int index)
 
 int vectorDelete(vector *v, int index)
 {
-    int  status = UNDEFINE;
+    int status = UNDEFINE;
     int i = 0;
-    if(v)
+    if (v)
     {
         if ((index < 0) || (index >= v->vectorList.total))
             return status;
@@ -103,8 +103,8 @@ int vectorDelete(vector *v, int index)
 
 int vectorFree(vector *v)
 {
-    int  status = UNDEFINE;
-    if(v)
+    int status = UNDEFINE;
+    if (v)
     {
         free(v->vectorList.items);
         v->vectorList.items = NULL;
@@ -113,26 +113,20 @@ int vectorFree(vector *v)
     return status;
 }
 
-void vector_init(vector *v)
-{
-    //init function pointers
-    v->pfVectorTotal = vectorTotal;
-    v->pfVectorResize = vectorResize;
-    v->pfVectorAdd = vectorPushBack;
-    v->pfVectorSet = vectorSet;
-    v->pfVectorGet = vectorGet;
-    v->pfVectorFree = vectorFree;
-    v->pfVectorDelete = vectorDelete;
-    v->vectorList.capacity = VECTOR_INIT_CAPACITY;
-    v->vectorList.total = 0;
-    v->vectorList.items = malloc(sizeof(void *) * v->vectorList.capacity);
-}
-
 static vector *new ()
 {
-  vector *vector_ptr = (vector *)malloc(sizeof(vector));
-  vector_init(vector_ptr);
-  return vector_ptr;
+    vector *vector_ptr = (vector *)malloc(sizeof(vector));
+    *vector_ptr = (vector){.pfVectorTotal = &vectorTotal,
+                           .pfVectorResize = &vectorResize,
+                           .pfVectorAdd = &vectorPushBack,
+                           .pfVectorSet = &vectorSet,
+                           .pfVectorGet = &vectorGet,
+                           .pfVectorFree = &vectorFree,
+                           .pfVectorDelete = &vectorDelete,
+                           .vectorList.capacity = VECTOR_INIT_CAPACITY,
+                           .vectorList.total = 0,
+                           .vectorList.items = malloc(sizeof(void *) * VECTOR_INIT_CAPACITY)};
+    return vector_ptr;
 }
 
 const struct VectorClass sVector = {.new = &new};

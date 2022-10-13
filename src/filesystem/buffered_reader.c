@@ -83,7 +83,15 @@ static void freeBuffer(buffer *this)
 static buffer *new (FILE *data)
 {
   buffer *buffer_struct = (buffer *)malloc(sizeof(buffer));
-  *buffer_struct = (buffer){.data = readFile(data), .size = getFileSize(data), .offset = 0, .readUint8 = &readUint8, .readUint16 = &readUint16, .readUint32 = &readUint32, .readString = &readString, .freeBuffer = &freeBuffer};
+  *buffer_struct = (buffer){
+      .data = readFile(data),
+      .size = getFileSize(data),
+      .offset = 0,
+      .readUint8 = &readUint8,
+      .readUint16 = &readUint16,
+      .readUint32 = &readUint32,
+      .readString = &readString,
+      .freeBuffer = &freeBuffer};
   fclose(data);
   return buffer_struct;
 }

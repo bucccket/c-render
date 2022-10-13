@@ -74,7 +74,16 @@ static menubar *new (struct window_ *window, int layoutRule)
     v->pfVectorAdd(v, "Edit");
     v->pfVectorAdd(v, "View");
 
-    *menubar_ptr = (menubar){.window = window, .x = 1, .y = 1, .width = window->width - 2, .height = 3, .layoutRule = layoutRule, .menuItems = v, .render = &render, .destroy = &destroy};
+    *menubar_ptr = (menubar){
+        .window = window,
+        .x = 1,
+        .y = 1,
+        .width = window->width - 2,
+        .height = 3,
+        .layoutRule = layoutRule,
+        .menuItems = v,
+        .render = &render,
+        .destroy = &destroy};
     return menubar_ptr;
 }
 

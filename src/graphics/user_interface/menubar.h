@@ -5,8 +5,8 @@
 #include <string.h>
 
 #include "window.h"
-#include "ui_utils.h"
 #include "../../types/vector.h"
+#include "ui_utils.h"
 
 #define LAYOUT_FLAG_TOP 0x1
 #define LAYOUT_FLAG_BOTTOM 0x2

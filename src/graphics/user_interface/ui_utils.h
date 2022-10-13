@@ -4,6 +4,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "menubar.h"
+#include "composite.h"
+#include "statuslabel.h"
+
 #define W_VLINE ACS_VLINE
 #define W_HLINE ACS_HLINE
 #define W_ULCORNER ACS_ULCORNER
@@ -12,3 +16,19 @@
 #define W_LRCORNER ACS_LRCORNER
 
 bool checkFlagAt(unsigned int flag, unsigned int bitindex);
+
+typedef struct element_
+{
+    enum
+    {
+        COMPOSITE,
+        MENUBAR,
+        STATUSLABEL
+    } type;
+    union
+    {
+        struct composite_ *composite;
+        struct menubar_ *menubar;
+        struct statuslabel_ *statuslabel;
+    };
+} element;

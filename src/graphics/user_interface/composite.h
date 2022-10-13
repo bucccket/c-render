@@ -24,5 +24,4 @@ typedef struct composite_
 extern const struct CompositeClass
 {
     composite *(*new)(struct window_ *window, char *compositeName, int x, int y, int width, int height, int compositeRule);
-
 } composite_;
