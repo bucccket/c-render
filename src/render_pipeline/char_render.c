@@ -45,7 +45,7 @@ int testScreenCentering(void)
     if (!adjustScreen(&row, &col, &r_old, &c_old))
     {
       drawPrimitiveRect(g2->data, g2->height, (col >> 1) - 14, (row >> 1) - 1); // slightly faster math
-      // drawMaskedRect(g->data, g->mask, g->width, g->height, x, y);
+      drawMaskedRect(g->data, g->mask, g->width, g->height, x, y);
 
       x += hspeed;
       y += vspeed;
@@ -58,7 +58,7 @@ int testScreenCentering(void)
         vspeed = -vspeed;
       }
       refresh();
-      // clearMaskedRect(g->mask, g->width, g->height, x, y);
+      clearMaskedRect(g->mask, g->width, g->height, x, y);
     }
     frame++;
   }
