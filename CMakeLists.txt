@@ -21,15 +21,15 @@ target_link_libraries(c-render z)
 set(CURSES_NEED_NCURSES TRUE)
 set(CURSES_NEED_WIDE TRUE)
 find_package(Curses REQUIRED)
-target_link_libraries(c-render curses)
+target_link_libraries(c-render ncursesw)
 
 #THREADS
 find_package(Threads REQUIRED)
 target_link_libraries(c-render ${CMAKE_THREAD_LIBS_INIT})
 
 #SOURCE 
-target_link_libraries(c-render utils curses)
-target_link_libraries(c-render render curses)
+target_link_libraries(c-render utils ncursesw)
+target_link_libraries(c-render render ncursesw)
 target_link_libraries(c-render graphics)
 target_link_libraries(c-render fs z)
 target_link_libraries(c-render ui types)
