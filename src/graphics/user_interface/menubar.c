@@ -2,9 +2,10 @@
 
 static void destroy(menubar *this)
 {
-    if (&this->menuItems)
+    if (this->menuItems)
     {
-        this->menuItems.pfVectorFree(&this->menuItems);
+        this->menuItems->pfVectorFree(this->menuItems);
+        free(this->menuItems);
     }
     free(this);
 }
@@ -50,10 +51,10 @@ static void render(menubar *this)
     }
 
     int offx = 1;
-    for (int i = 0; i < this->menuItems.pfVectorTotal(&this->menuItems); i++)
+    for (int i = 0; i < this->menuItems->pfVectorTotal(this->menuItems); i++)
     {
-        char *item = (char *)this->menuItems.pfVectorGet(&this->menuItems, i);
-        mvprintw(this->y + 1, this->x + offx, " %s ", this->menuItems.pfVectorGet(&this->menuItems, i));
+        char *item = (char *)this->menuItems->pfVectorGet(this->menuItems, i);
+        mvprintw(this->y + 1, this->x + offx, " %s ", this->menuItems->pfVectorGet(this->menuItems, i));
         offx += strlen(item) + 1;
     }
 }
@@ -62,10 +63,10 @@ static menubar *new (struct window_ *window, int layoutRule)
 {
     menubar *menubar_ptr = (menubar *)malloc(sizeof(menubar));
 
-    vector v = *sVector.new(); // go I love huge, fat, leaking, consturctor calls
-    v.pfVectorAdd(&v, "Menu |");
-    v.pfVectorAdd(&v, "Edit |");
-    v.pfVectorAdd(&v, "View");
+    vector* v = sVector.new(); // go I love huge, fat, leaking, consturctor calls
+    v->pfVectorAdd(v, "Menu |");
+    v->pfVectorAdd(v, "Edit |");
+    v->pfVectorAdd(v, "View");
     *menubar_ptr = (menubar){.window = window, .x = 1, .y = 1, .width = window->width - 2, .height = 3, .layoutRule = layoutRule, .menuItems = v, .render = &render, .destroy = &destroy};
     return menubar_ptr;
 }

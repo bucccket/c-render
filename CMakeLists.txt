@@ -33,7 +33,7 @@ target_link_libraries(c-render utils curses)
 target_link_libraries(c-render render curses)
 target_link_libraries(c-render graphics)
 target_link_libraries(c-render fs z)
-target_link_libraries(c-render ui)
+target_link_libraries(c-render ui types)
 
 target_compile_options(c-render PRIVATE -fsanitize=address)
 target_link_options(c-render PRIVATE -fsanitize=address)
