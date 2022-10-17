@@ -23,12 +23,14 @@ typedef struct element_
     {
         COMPOSITE,
         MENUBAR,
-        STATUSLABEL
+        STATUSLABEL,
+        LABEL
     } type;
     union
     {
         struct composite_ *composite;
         struct menubar_ *menubar;
         struct statuslabel_ *statuslabel;
+        struct label_ *label;
     };
 } element;

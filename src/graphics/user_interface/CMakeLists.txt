@@ -1,4 +1,5 @@
 set(UI_HDRS
+   label.h
    statuslabel.h
    menubar.h
    composite.h
@@ -7,6 +8,7 @@ set(UI_HDRS
 )
 
 set(UI_SRC
+   label.c
    statuslabel.c
    menubar.c
    composite.c
