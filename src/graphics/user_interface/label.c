@@ -10,8 +10,9 @@ static void destroy(label *this)
 }
 
 void setText(label *this, char *text){
-    char *allocContent = (char *)calloc(strlen(content) + 1, sizeof(char));
-    memcpy(allocContent, tihs->content, strlen(content));
+    char *allocContent = (char *)calloc(strlen(text) + 1, sizeof(char));
+    memcpy(allocContent, text, strlen(text));
+    this->content = allocContent;
 }
 
 static void render(label *this)
