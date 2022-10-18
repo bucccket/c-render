@@ -14,7 +14,7 @@ void spriteEdit()
     adjustScreen(&row, &col, &r_old, &c_old);
 
     window *window = window_.new(col, row, 2, 2, "Sprite Editor");
-    element *menubar = &(element){
+    element *menubartest = &(element){
         .type = MENUBAR,
         .menubar = menubar_.new(window, LAYOUT_FLAG_TOP)};
     element *titlebar = &(element){
@@ -29,12 +29,16 @@ void spriteEdit()
     element *status = &(element){
         .type = STATUSLABEL,
         .statuslabel = statuslabel_.new(window, "STATUS: User Interface in progress still. Also the status label render is not fully implemented yet")}; 
+    element *labeltest = &(element){
+        .type = LABEL,
+        .label = label_.new(window,"test label", 10,30, TEXT_ORIENTATION_LEFT)};
 
-    window->add(window, menubar);
+    window->add(window, menubartest);
     window->add(window, titlebar);
     window->add(window, options);
     window->add(window, info);
     window->add(window, status);
+    window->add(window, labeltest);
 
     while (true)
     {

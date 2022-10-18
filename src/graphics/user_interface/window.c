@@ -25,6 +25,9 @@ static void destroy(struct window_ *this)
             case STATUSLABEL:
                 elem->statuslabel->destroy(elem->statuslabel);
                 break;
+            case LABEL:
+                elem->label->destroy(elem->label);
+                break;
             }
             //free(elem); //TODO: MALLOC all elements
         }
@@ -76,6 +79,9 @@ static void render(struct window_ *this)
             break;
         case STATUSLABEL:
             elem->statuslabel->render(elem->statuslabel);
+            break;
+        case LABEL:
+            elem->label->render(elem->label);
             break;
         }
     }

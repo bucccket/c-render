@@ -7,6 +7,7 @@
 #include "menubar.h"
 #include "composite.h"
 #include "statuslabel.h"
+#include "label.h"
 
 #define W_VLINE ACS_VLINE
 #define W_HLINE ACS_HLINE

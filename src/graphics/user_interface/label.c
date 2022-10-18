@@ -9,7 +9,7 @@ static void destroy(label *this)
     free(this);
 }
 
-void setText(label *this, char *text){
+static void setText(label *this, char *text){
     char *allocContent = (char *)calloc(strlen(text) + 1, sizeof(char));
     memcpy(allocContent, text, strlen(text));
     this->content = allocContent;
@@ -17,7 +17,7 @@ void setText(label *this, char *text){
 
 static void render(label *this)
 {
-    mvprintw(this->y, this->x + 1, " %s ", this->content);
+    mvprintw(this->y, this->x + 1, "%s", this->content);
 }
 
 static label *new (window *window, char *content, int x, int y, int textstyle)
@@ -32,6 +32,7 @@ static label *new (window *window, char *content, int x, int y, int textstyle)
         .y = y,
         .textstyle = textstyle,
         .render = &render,
+        .setText = &setText,
         .destroy = &destroy};
     return label_ptr;
 }
