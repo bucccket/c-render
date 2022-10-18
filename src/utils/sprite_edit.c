@@ -31,7 +31,7 @@ void spriteEdit()
         .statuslabel = statuslabel_.new(window, "STATUS: User Interface in progress still. Also the status label render is not fully implemented yet")}; 
     element *labeltest = &(element){
         .type = LABEL,
-        .label = label_.new(window,"test label", 10,30, TEXT_ORIENTATION_LEFT)};
+        .label = label_.new(window,"test label", 10,5, TEXT_ORIENTATION_LEFT)};
 
     window->add(window, menubartest);
     window->add(window, titlebar);

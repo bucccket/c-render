@@ -17,7 +17,10 @@ static void setText(label *this, char *text){
 
 static void render(label *this)
 {
-    mvprintw(this->y, this->x + 1, "%s", this->content);
+    if(!this->enabled){
+      return;
+    }
+    mvprintw(this->x, this->y, "%s", this->content);
 }
 
 static label *new (window *window, char *content, int x, int y, int textstyle)
@@ -31,6 +34,7 @@ static label *new (window *window, char *content, int x, int y, int textstyle)
         .x = x,
         .y = y,
         .textstyle = textstyle,
+        .enabled = true,
         .render = &render,
         .setText = &setText,
         .destroy = &destroy};

@@ -100,6 +100,8 @@ static window *new (int width, int height, int xCell, int yCell, char *title)
     *window_ptr = (window){
         .width = width,
         .height = height,
+        .adjusted_width = 0,
+        .adjusted_height = 0,
         .xCell = xCell,
         .yCell = yCell,
         .title = title,

@@ -10,8 +10,9 @@
 
 typedef struct window_
 {
-  int width;
-  int height;
+  int width, height;
+  int adjusted_width, adjusted_height; //TODO
+  int x, y; //TODO
   int xCell;
   int yCell;
   char *title;

@@ -1,7 +1,7 @@
 #pragma once
 
-#include <stdarg.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #include "window.h"
 #include "ui_utils.h"
@@ -17,6 +17,7 @@ typedef struct composite_
     int x, y;
     int width, height;
     int compositeRule; // flags for composite rule
+    bool enabled;
     void (*render)(struct composite_ *this);
     void (*destroy)(struct composite_ *this);
 } composite;

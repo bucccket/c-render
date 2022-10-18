@@ -11,6 +11,9 @@ static void destroy(composite *this)
 
 static void render(composite *this)
 {
+    if(!this->enabled){
+      return;
+    }
     int x, y = 0;
 
     if (this->x + this->width >= this->window->width || this->y + this->height >= this->window->height)
@@ -64,6 +67,7 @@ static composite *new (window *window, char *compositeName, int x, int y, int wi
         .width = width,
         .height = height,
         .compositeRule = compositeRule,
+        .enabled = true,
         .render = &render,
         .destroy = &destroy};
     return composite_ptr;

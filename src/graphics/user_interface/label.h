@@ -1,7 +1,7 @@
 #pragma once
 
-#include <stdarg.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #include "window.h"
 #include "ui_utils.h"
@@ -17,6 +17,7 @@ typedef struct label_
     int x, y;
     int width, height; // internal variables
     int textstyle; // flags for text styling
+    bool enabled;
     void (*render)(struct label_ *this);
     void (*setText)(struct label_ *this, char *text);
     void (*destroy)(struct label_ *this);
