@@ -28,10 +28,10 @@ void spriteEdit()
         .composite = composite_.new(window, "info", 1, 16, 20, 15, COMPOSITE_FLAG_CENTER | COMPOSITE_FLAG_EXTEND_V)};
     element *status = &(element){
         .type = STATUSLABEL,
-        .statuslabel = statuslabel_.new(window, "STATUS: User Interface in progress still. Also the status label render is not fully implemented yet")}; 
+        .statuslabel = statuslabel_.new(window, "STATUS: User Interface in progress still. Also the status label render is not fully implemented yet")};
     element *labeltest = &(element){
         .type = LABEL,
-        .label = label_.new(window,"test label", 10,5, TEXT_ORIENTATION_LEFT)};
+        .label = label_.new(window, "test label", 10, 5, TEXT_ORIENTATION_LEFT)};
 
     window->add(window, menubartest);
     window->add(window, titlebar);

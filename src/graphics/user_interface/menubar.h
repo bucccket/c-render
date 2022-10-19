@@ -17,7 +17,7 @@ typedef struct menubar_
     int x, y;
     int width, height;
     int layoutRule; // flags for composite rule
-    vector* menuItems;
+    vector *menuItems;
     void (*render)(struct menubar_ *this);
     void (*destroy)(struct menubar_ *this);
 } menubar;

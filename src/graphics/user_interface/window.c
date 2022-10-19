@@ -29,7 +29,7 @@ static void destroy(struct window_ *this)
                 elem->label->destroy(elem->label);
                 break;
             }
-            //free(elem); //TODO: MALLOC all elements
+            // free(elem); //TODO: MALLOC all elements
         }
         else
         {

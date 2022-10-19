@@ -16,7 +16,7 @@ typedef struct label_
     char *content;
     int x, y;
     int width, height; // internal variables
-    int textstyle; // flags for text styling
+    int textstyle;     // flags for text styling
     bool enabled;
     void (*render)(struct label_ *this);
     void (*setText)(struct label_ *this, char *text);

@@ -11,8 +11,9 @@ static void destroy(composite *this)
 
 static void render(composite *this)
 {
-    if(!this->enabled){
-      return;
+    if (!this->enabled)
+    {
+        return;
     }
     int x, y = 0;
 

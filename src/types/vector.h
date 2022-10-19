@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 #define VECTOR_INIT_CAPACITY 6
-#define UNDEFINE  -1
+#define UNDEFINE -1
 #define SUCCESS 0
 
 typedef struct sVectorList
@@ -14,9 +14,10 @@ typedef struct sVectorList
     int total;
 } sVectorList;
 
-typedef struct sVector{
+typedef struct sVector
+{
     sVectorList vectorList;
-//function pointers
+    // function pointers
     int (*pfVectorTotal)(struct sVector *);
     int (*pfVectorResize)(struct sVector *, int);
     int (*pfVectorAdd)(struct sVector *, void *);
@@ -24,9 +25,9 @@ typedef struct sVector{
     void *(*pfVectorGet)(struct sVector *, int);
     int (*pfVectorDelete)(struct sVector *, int);
     int (*pfVectorFree)(struct sVector *);
-}vector;
+} vector;
 
 extern const struct VectorClass
 {
-  vector *(*new)(void);
+    vector *(*new)(void);
 } sVector;

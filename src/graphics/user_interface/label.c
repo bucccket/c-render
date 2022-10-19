@@ -9,7 +9,8 @@ static void destroy(label *this)
     free(this);
 }
 
-static void setText(label *this, char *text){
+static void setText(label *this, char *text)
+{
     char *allocContent = (char *)calloc(strlen(text) + 1, sizeof(char));
     memcpy(allocContent, text, strlen(text));
     this->content = allocContent;
@@ -17,8 +18,9 @@ static void setText(label *this, char *text){
 
 static void render(label *this)
 {
-    if(!this->enabled){
-      return;
+    if (!this->enabled)
+    {
+        return;
     }
     mvprintw(this->x, this->y, "%s", this->content);
 }

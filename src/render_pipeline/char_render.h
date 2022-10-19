@@ -12,7 +12,7 @@
 #define FPS 60
 
 #define MIN_COL 160 // width
-#define MIN_ROW 40 // height
+#define MIN_ROW 40  // height
 
 #define RENDER_OK 0
 #define RENDER_CONTINUE 1
