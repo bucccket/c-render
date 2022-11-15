@@ -18,6 +18,9 @@ typedef struct composite_
     int width, height;
     int compositeRule; // flags for composite rule
     bool enabled;
+    int elementsCount;
+    struct element_ **elements;
+    void (*add)(struct composite_ *this, struct element_ *element);
     void (*render)(struct composite_ *this);
     void (*destroy)(struct composite_ *this);
 } composite;

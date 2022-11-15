@@ -1,7 +1,43 @@
 #include "composite.h"
 
+static void add(composite *this, element *element)
+{
+    this->elements = realloc(this->elements, sizeof(struct userInterfaceElement *) * (this->elementsCount + 1));
+    this->elements[this->elementsCount++] = element; // add element to array
+}
+
 static void destroy(composite *this)
 {
+    for (int i = 0; i < this->elementsCount; i++)
+    {
+        element *elem = this->elements[i];
+        if (elem)
+        {
+            switch (elem->type)
+            {
+            case COMPOSITE:
+                elem->composite->destroy(elem->composite);
+                break;
+            case MENUBAR:
+                elem->menubar->destroy(elem->menubar);
+                break;
+            case STATUSLABEL:
+                elem->statuslabel->destroy(elem->statuslabel);
+                break;
+            case LABEL:
+                elem->label->destroy(elem->label);
+                break;
+            }
+            // free(elem); //TODO: MALLOC all elements
+        }
+        else
+        {
+            fprintf(stderr, "[ERROR] %s->composites[%d] is NULL\n", this->compositeName, i);
+        }
+    }
+    
+    free(this->elements); // iteratively free all composites
+ 
     if (this->compositeName)
     {
         free(this->compositeName);
@@ -69,8 +105,11 @@ static composite *new (window *window, char *compositeName, int x, int y, int wi
         .height = height,
         .compositeRule = compositeRule,
         .enabled = true,
+	.elementsCount = 0,
+	.elements = (element**)calloc(1, sizeof(element*)),
         .render = &render,
-        .destroy = &destroy};
+        .add = &add,
+	.destroy = &destroy};
     return composite_ptr;
 }
 

@@ -18,15 +18,19 @@
 
 bool checkFlagAt(unsigned int flag, unsigned int bitindex);
 
+
+typedef enum
+{
+    COMPOSITE,
+    MENUBAR,
+    STATUSLABEL,
+    LABEL
+} ui_type;
+
 typedef struct element_
 {
-    enum
-    {
-        COMPOSITE,
-        MENUBAR,
-        STATUSLABEL,
-        LABEL
-    } type;
+    int x, y;
+    ui_type type;
     union
     {
         struct composite_ *composite;

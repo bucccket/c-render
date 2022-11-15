@@ -33,7 +33,7 @@ static void destroy(struct window_ *this)
         }
         else
         {
-            fprintf(stderr, "[ERROR] %s->composites[%d] is NULL\n", this->title, i);
+            fprintf(stderr, "[ERROR] %s->elements[%d] is NULL\n", this->title, i);
         }
     }
     free(this->elements); // iteratively free all composites
@@ -96,7 +96,6 @@ void resize(struct window_ *this, int width, int height)
 static window *new (int width, int height, int xCell, int yCell, char *title)
 {
     window *window_ptr = (window *)malloc(sizeof(window));
-    element **element_ptr = (element **)calloc(1, sizeof(element *));
     *window_ptr = (window){
         .width = width,
         .height = height,
@@ -105,7 +104,7 @@ static window *new (int width, int height, int xCell, int yCell, char *title)
         .xCell = xCell,
         .yCell = yCell,
         .title = title,
-        .elements = element_ptr,
+        .elements = (element **)calloc(1, sizeof(element *)),
         .elementsCount = 0,
         .add = &add,
         .destroy = &destroy,
