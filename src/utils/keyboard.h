@@ -11,4 +11,5 @@ typedef enum
 } keys;
 
 void initKeyboard(void);
+void endKeyboard(void);
 int KeyPressed();

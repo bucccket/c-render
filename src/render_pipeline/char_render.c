@@ -18,7 +18,7 @@ int testScreenCentering(void)
   {
     test->freeBuffer(test);
     endwin();
-
+    endKeyboard();
     return RENDER_ERROR_FS;
   }
   int frame = 0;
@@ -65,6 +65,7 @@ int testScreenCentering(void)
   test->freeBuffer(test);
   test2->freeBuffer(test2);
   endwin();
+  endKeyboard();
   printf("got here\n");
   return RENDER_OK;
 }
@@ -82,6 +83,7 @@ int keyHandle(keys *key)
   case 27:
     *key = K_ESC;
     endwin();
+    endKeyboard();
     return RENDER_ABORT;
     break;
   case 'w':

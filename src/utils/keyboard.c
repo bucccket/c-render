@@ -7,6 +7,13 @@ void initKeyboard(void)
   nodelay(stdscr, TRUE);
 }
 
+void endKeyboard(void)
+{
+  nocbreak();
+  echo();
+  nodelay(stdscr, FALSE);
+}
+
 int KeyPressed()
 {
   int c = wgetch(stdscr);

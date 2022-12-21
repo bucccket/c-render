@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
-#include "../tui/tui.h"
+#include "../../tui/tui.h"
 
 /* change this if source at other location */
 
@@ -218,7 +218,7 @@ void subsub(void)
 
 /***************************** start main menu  ***************************/
 
-int spriteEdit()
+int tuidemo_main(int argc, char **argv)
 {
     setlocale(LC_ALL, "");
 
