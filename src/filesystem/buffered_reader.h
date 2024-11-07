@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../../include/zlib-1.2.12/zlib.h"
+#include <zlib.h>
 
 #define FS_OK 0
 #define FS_ERR_READ 1

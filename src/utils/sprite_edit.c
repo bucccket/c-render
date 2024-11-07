@@ -61,6 +61,6 @@ void drawBox(int x, int y, char **ptr)
     int offs = 0;
     while (*ptr != NULL)
     {
-        mvprintw(y + offs++, x, *ptr++);
+        mvprintw(y + offs++, x, "%s", *ptr++);
     }
 }
